@@ -1,0 +1,104 @@
+<html>
+
+<head>
+<title>Me-Calc_98</title>
+</head>
+
+<body OnLoad OnUnload>
+<script Language="JavaScript">
+/*    " CSDVSS:"+top.ID[1]
+     +",DEP,"+top.ID[2]
+     +" ANO:"+top.ANOS[top.ID[3]]
+     +", ISDEP:,"  +top.ID[6]
+     +",ASC:,"+top.ID[7]+" TOMAIL:"+
+     +top.TO_MAIL[1]+","+top.TO_MAIL[2]+",DEFH,"+top.DEFH
+     +",  DRC,"+top.DRC
+     +",  RBA,"+top.RBA
+     +",  RFA,"+top.RFA
+     +",  DA," +top.DA  
+     +",  GRA,"+top.GRA
+*/
+// Com dados : ID:0,0,3,,,0,0 
+top.ID[1]=0 ; // C=0,SDVSS
+top.ID[2]=2 ; // DEP 0=0,1,2,3,4,5
+top.ID[3]=2 ; // 1996=0,1,2=1998,3=1999
+top.ID[6]=0 ; // Nr deps Asc 0,1,2
+top.ID[7]=0 ; // Nr Asc 0,1,2,3,4
+////  TOMAIL:0  0 DEFH: false,true,false,false,false,false       
+//top.TO_MAIL[1]=   ;//+","+
+//top.TO_MAIL[2]=   ;//+",DEFH,"+
+top.DEFH=[false,false,false,false,false,false];
+/// RENDIMENTOS:
+top.RBA=[0,+9346953+264711,0,0,0,0]          ;//     +" RBA "+top.RBA
+top.RFA=[0,+2259650+92640,0,0,0,0 ]          ;//     +" RFA "+
+top.CSS=[0,+358594+38378+7941,0,0,0,0 ]          ;//     +" CSS "+top.CSS
+top.DRC=[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0 ]          ;//     +" DRC "+top.DRC
+//  Ded Específica a recalcular:
+top.DA =[0,0,0,0,0,0 ]          ;//     +" DA " +top.DA  
+top.GRA=[0,0,0,0,0,0 ]          ;//     +" GRA "+top.GRA
+top.RBH=[0,0,0,0,0,0 ]          ;//     +" RBH "+top.RBH
+top.RFH=[0,0,0,0,0,0]          ;//     +" RFH "+top.RFH
+top.MPS_PDR=0          ;// +" MPS_PDR "+top.MPS_PDR
+
+//==ABAT :
+top.ABAT1    =[0,29989,0,0,0,0,0,0,17,-1,0,175801,0,-1,1358198,0,0,0,50900+23400+78503,50000,0,0 ]          ;// +" ABAT "+top.ABAT1
+top.ABAT_8   =[0,0,0] ; //despesas educ suj passivo
+top.ABAT_CB_8=[false,false,false] ; 
+//Discriminação Despesas com educação dos dependentes, não deficientes:
+top.ABAT_11=[0,487800,555100,0,0,0,0];
+top.ABAT_CB_11=[false,false,false,false,false,false,false];
+//==ABAT_15 :Discriminação Quotizações sindicais, acrescidas de 50%
+top.ABAT_15=[0,76761*1.5-.5,0,0,0,0 ]          ;// +" ABAT_15 "+top.ABAT_15
+//
+top.ID[4]=top.DEFH[1];top.ID[5]=top.DEFH[2];
+//Deduções ao Rendimento Colectável ou à Colecta 
+top.DRC=[0,418000,418000,209000,209000,0,0,0,0,
+         157625+423550+594975,
+         157625+316050+594975,0,0,0,0,0,0,0,0];
+
+for (var i= 0; i<=5; i++) {ChRL(i);ChRBH1(i);}
+top.ABAT1[9]=0;for (var i= 1; i<=6; i++) 
+       {top.ABAT1[9]=top.ABAT1[9]+top.ABAT_11[i];}
+top.ABAT1[13]=0;for (var i= 1; i<=5; i++) 
+       {top.ABAT1[13]=top.ABAT1[13]+top.ABAT_15[i];}
+
+function ChRL(x) {
+	top.DA[x] = Math.min(Math.round(0.7* top.RBA[x]) , top.MaxDA  );
+	top.DA[x] = Math.max(                 top.DA[x]  , top.CSS[x] );
+	top.DA[x] = Math.min(                 top.DA[x]  , top.RBA[x] ); 
+// Não pode ser em certos casos,porquê ???
+}
+function ChRBH1(x) {
+
+	top.RBH[x] = Math.max(top.RBH0[x]-top.DAH[x] , 0  );
+}
+</script>
+
+
+<p align="left">Programas Zico -Cálculo de Irs-José Oliveira Mendes V.3 <a href="../../../Zico/Cv/cv.htm" target="_new">O meu currículo</a> <a target="_top" href="../../../index.htm">Home Page</a> -c/teste 1999: <!--webbot bot="Timestamp" s-type="EDITED" s-format="%d/%m/%y %H:%M" startspan -->07/03/99 15:20<!--webbot bot="Timestamp" endspan i-checksum="17136" --> </p>
+
+<p><a><img SRC="http://c1.thecounter.com/id=113047" BORDER="0"></a></p>
+<!-- Start of TheCounter.com Code -->
+<script><!--
+s="na";c="na";j="na";f=""+escape(document.referrer)
+//--></script>
+<script language="javascript1.2"><!--
+s=screen.width;v=navigator.appName
+if (v != "Netscape") {c=screen.colorDepth}
+else {c=screen.pixelDepth}
+j=navigator.javaEnabled()
+//--></script>
+<script><!--
+function pr(n) {document.write(n,"\n");}
+NS2Ch=0
+if (navigator.appName == "Netscape" &&
+navigator.appVersion.charAt(0) == "2") {NS2Ch=1}
+if (NS2Ch == 0) {
+r="&size="+s+"&colors="+c+"&referer="+f+"&java="+j+""
+pr("<A HREF=\"http://www.TheCounter.com\" TARGET=\"_top\"><IMG")
+pr("BORDER=0 SRC=\"http://c1.thecounter.com/id=113047"+r+"\"></A>")}
+//--></script>
+<noscript>
+
+</body>
+</html>

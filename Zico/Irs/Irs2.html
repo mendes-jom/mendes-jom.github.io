@@ -1,0 +1,285 @@
+<!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML 3.2//EN">
+<html>
+
+<head>
+<meta NAME="AUTHOR" CONTENT="J.Mendes-Zico">
+<title>Mendes-Zico-Irs</title>
+</head>
+<!--webbot bot="HTMLMarkup" startspan TAG="XBOT" --></SCRIPT><!--webbot bot="HTMLMarkup" endspan
+-->
+<script LANGUAGE="JavaScript">
+<!-- Start hiding from older browsers ------------ Start
+
+function CalcRendimentos(){
+
+    for (var i= 0; i<=5; i++) {CalcRendimentosX(i) }
+}
+//----------------------------
+function CalcRendimentosX(i){
+top.DEFTX[i]=100;
+if (i<3){ if (top.DEF[i] == true ){ top.DEFTX[i]=150;}                    }
+//alert(top.DEFTX[i]);
+   top.RBY[i]=0;
+if (top.DEF[i] == true ) {//alert("TRUE");
+       top.RBY[i]=top.TxRBX * top.RBX[i] /100 ;
+       if (top.RBY[i] > top.MaxDedRBX ) {top.RBY[i] = top.MaxDedRBX  ; //alert("MAX :"+top.MaxDedRBX);
+                                        }
+
+}          
+  top.RBA[i]=top.RBX[i]-top.RBY[i];
+//--
+  top.RHY[i]=0;
+
+if (top.DEF[i] == true ) {//alert("TRUE");
+       top.RHY[i]=Math.round(top.TxRHX * top.RBH0[i] /100,0 );
+//       alert(top.RHY[i]);
+//top.RHY[i]=Math.parseInt(top.RHY[i]);
+       if (top.RHY[i] > top.MaxDedRBH ) {top.RHY[i] = top.MaxDedRBH  ; //alert("MAX :"+top.MaxDedRBX);
+                                        }
+//      alert(top.RHY[i]);
+} 
+//alert("top.RHY[i]"+ top.RHY[i]);
+// MaxDedRBH= 1418000      ;TxRHX=30;
+
+  if (top.DEF[i] == false ) {top.DAH[i]=top.DedCatHNorm;}
+             	        else {top.DAH[i]=top.DedCatHInv ;}
+  M=top.RBH0[i]-top.RHY[i];
+  if (top.DAH[i] > M ) {top.DAH[i] = M ;}
+
+  top.RBH[i] = M
+//top.RBH[i] =Math.max(M-top.DAH[i] , 0  );
+
+//  top.MaxDA=Math.max(DANormal,DASMN);
+
+  M=top.MaxDA;if (top.DEF[i] == true) {M=M*150/100;     }
+  
+  top.DA[i]  = Math.min(0.7* top.RBA[i] , M  );  
+//top.DA[i]  = Math.min(0.7* top.RBA[i] , top.MaxDA  );
+  top.DA[i]  = Math.max(     top.DA[i]  , top.CSS[i] );
+  top.DA[i]  = Math.min(     top.DA[i]  , top.RBA[i] );
+
+  top.RLA[i]=top.RBA[i]-top.DA[i]+top.GRA[i];
+  top.RLH[i]=top.RBH[i]-top.DAH[i];
+}
+//----------------------------
+function ARR0() {
+for (var i= 0; i<=5; i++) {
+    RBX[i]=0;RBY[i]=0;RHY[i]=0;// new 98
+    RBA[i]=0;RFA[i]=0;CSS[i]=0;DA[i]=0;GRA[i]=0;
+    RBH[i]=0;RBH0[i]=0;RFH[i]=0;DEF[i]=false;DAH[i]=0;
+                          }
+for (var i= 0; i<=18; i++) {
+    DRC[i]=0;
+           }
+}
+function LerDados(Ano) {
+	// --------------------------------- Dados Variáveis:
+	//switch (Ano) {
+
+	//case 0 : //"1996" :
+       if ( Ano == 0) {
+		DASMN       = 0	 ;	    // Novo em 1997
+		DANormal    = 465000 ;      // Dedução Normal
+		TxDaNormal  = 0.65 ;        // Taxa a aplicar em 97, em 96 era 0.65
+		DedCatHNorm = 1350000;      //  Dedução Normal cat.H
+		DedCatHInv  = 1775000;      //  Dedução Normal cat.H in
+		}
+	//case 1 : //"1997" :
+       if ( Ano == 1) {
+		SMN         = 56700 ;       // Salario minimo nacional
+		TxDaSMN     = 0.71*12 ;     //
+		DASMN       = SMN*TxDaSMN ; // Novo em 1997
+		DANormal    = 484000 ;      // Dedução Normal
+		TxDaNormal  = 0.7 ;         // Taxa a aplicar em 97, em 96 era 0.65
+		DedCatHNorm = 1385000;      //  Dedução Normal cat.H
+		DedCatHInv  = 1800500;      //  Dedução Normal cat.H invalidez >60% -->DedCatHNorm*1.5
+			} 
+ //       	break;
+
+//	case 2 : //"1998" :
+       if ( Ano == 2) {
+		SMN         = 58900 ;       // Salario minimo nacional
+		TxDaSMN     = 0.71*12 ;     //
+		DASMN       = SMN*TxDaSMN ; // 501 828
+		DANormal    = 498000 ;      // Dedução Normal
+		TxDaNormal  = 0.7 ;         // Taxa a aplicar em 97, em 96 era 0.65
+		DedCatHNorm = 1415000;      //  Dedução Normal cat.H
+		DedCatHInv  = 1839500;      //  Dedução Normal cat.H invalidez >60% -->DedCatHNorm*1.5
+                TxRBX       = 50; // 50%    // Deficientes
+                MaxDedRBX   = 2460000;      // Deficientes
+	        MaxDedRBH   = 1388000 ; TxRHX=30;// Deficientes 99
+			}
+//		break;
+
+//	case 2 : //"1999" :
+       if ( Ano == 3) {
+	//	SMN         = 58900*1.02 ;       // Salario minimo nacional
+	SMN         = 61300 ;       // Salario minimo nacional
+	//	TxDaSMN     = 0.71*12 ;     //
+	TxDaSMN     = 0.72*12 ;     //
+		DASMN       = SMN*TxDaSMN ; // 501 828
+		DANormal    = 529632; //522000 ;      // Dedução Normal
+		TxDaNormal  = 0.7 ;         // Taxa a aplicar em 97, em 96 era 0.65
+		DedCatHNorm = 1445000 ;//1415000*1.02;      //  Dedução Normal cat.H
+		DedCatHInv  = 1878500 ;//1839500*1.02;      //  Dedução Normal cat.H invalidez >60% -->DedCatHNorm*1.5
+                TxRBX       = 50; // 50%    // Deficientes
+                MaxDedRBX   = 2512000;      // Deficientes
+	        MaxDedRBH   = 1418000      ;TxRHX=30;// Deficientes 99
+			}
+//		break;
+
+//	default: alert("top.Dados:ano desconhecido");
+//	   }
+   MaxDA=Math.max(DANormal,DASMN);
+   DEF[1]=ID[4];
+   DEF[2]=ID[5];
+top.CalcRendimentos();
+}
+
+ID      = new Array();
+
+RBA     = new Array();
+RLA     = new Array();// new 98
+RLH     = new Array();// new 98
+RBX     = new Array();// new 98
+RBY     = new Array();// new 98
+RFA     = new Array();
+CSS     = new Array();
+DA      = new Array();
+GRA     = new Array();
+RHY     = new Array();//new 98
+
+TO_MAIL=new Array(); //16/10/98
+
+//
+RBH     = new Array();
+RBH0    = new Array();
+DEF     = new Array();
+DEFTX   =new Array();
+DAH     = new Array();
+RFH     = new Array();
+ANOS    = new Array("1996","1997","1998","1999");
+CIVIL   = new Array("C","S1","S2","S3","S4","F");
+/*
+        <option value="C">Casado</option>
+        <option value="S1">Solteiro</option>
+        <option value="S2">Divorciado</option>
+        <option value="S3">Viuvo</option>
+        <option value="S4">Separado judicialmente</option>
+        <option value="F">Separado de facto</option>   
+*/
+//
+DRC     = new Array();
+
+//
+ARR0();
+
+
+MPS_PDR=0;		// Rendimentos..Montante de prémios de seg
+			// No âmbito de desgaste rápido
+			// Integralmente dedutível do Rendimento
+// ------------------------------------IDENTIFICA--------Start--------
+
+   ID[1]=0 //"C" ;    // Civil -- Casado
+   ID[2]=0 //"0" ;    // Deps  -- 
+   ID[3]=3; //"1999" ; // Ano  -- 
+   ID[4]=false ;  // CB1  -- 
+   ID[5]=false ;  // CB2  --
+   ID[6]=0 //"0" ;    // DefD  -- 
+   ID[7]=0 //"0" ;    // Asc  --  
+   LerDados(ID[3]);
+   RL=0; // Rendimento líquido   
+   RT=0; // Retenções
+   DD=0; // Deduções à Colecta
+   Irs=0;//IRS
+   FIM=0;//FINALMENTE o SALDO 
+// ------------------------------------IDENTIFICA--------End --------
+// ------------------------------------ABATIMENTOS-------Start-------
+	ABAT1     = new Array();
+        ABAT1Propinas=0;
+	ABAT_8    = new Array();
+	ABAT_11   = new Array();
+	ABAT_15   = new Array();
+	ABAT_CB_8 = new Array();
+	ABAT_CB_11= new Array();
+
+   EDIT_actual=1;       //1999
+   EDTI1= new Array();  // 1999
+   EDTI01= new Array(); // 1999 
+   EDTI02= new Array(); // 1999
+   TRTI = new Array(); // 1999
+   DETI = new Array(); // 1999
+   RLTI = new Array(); // 1999
+   RFTI = new Array(); // 1999
+
+
+	for (var i= 0; i<=21; i++) { ABAT1[i]  =0;} 
+	for (var i= 0; i<=2 ; i++) { ABAT_8[i] =0;ABAT_CB_8[i] =false;}
+	for (var i= 0; i<=6 ; i++) { ABAT_11[i]=0;ABAT_CB_11[i]=false;}
+	for (var i= 0; i<=5 ; i++) { ABAT_15[i]=0;}
+   for (var i= 0; i<=100 ; i++) { EDTI1[i]=0;}  // 1999:20*5
+   for (var i= 0; i<=100 ; i++) { EDTI01[i]=0;} // 1999:20*5 
+   for (var i= 0; i<=100 ; i++) { EDTI02[i]=0;} // 1999:20*5 
+	for (var i= 0; i<=5 ; i++) { TRTI[i]=0;}
+	for (var i= 0; i<=5 ; i++) { DETI[i]=0;}
+	for (var i= 0; i<=5 ; i++) { RLTI[i]=0;}
+	for (var i= 0; i<=5 ; i++) { RFTI[i]=0;}
+TI_calc(1);
+
+
+//   for (var i= 1; i<=5; i++) {DAH[i]=DedCatHNorm; }
+//////////////
+function TI_calc(x) {
+Base=(top.EDIT_actual-1)*20;
+//top.EDTI1[Base+0])=top.TRTI[x];
+//alert(""+Base);
+
+
+  Base=(top.EDIT_actual-1)*20;
+  M32=325*top.EDTI1[Base+0]/1000;
+  M10=top.EDTI1[Base+0]/10;
+
+//alert(""+top.EDTI1[Base+0]);
+
+  top.EDTI1[Base+2]=top.EDTI01[Base+2]/2+top.EDTI02[Base+2];
+  top.EDTI1[Base+3]=top.EDTI01[Base+3]/2+top.EDTI02[Base+3];
+  top.EDTI1[Base+4]=top.EDTI01[Base+4]/2+top.EDTI02[Base+4];
+  top.EDTI1[Base+6]=top.EDTI01[Base+6]/2+top.EDTI02[Base+6];
+
+
+  D1=top.EDTI1[Base+1]+top.EDTI1[Base+2]+top.EDTI1[Base+3]+top.EDTI1[Base+11]+top.EDTI1[Base+12]
+//  E4_16=0;for (var i= 4; i<=16 ; i++) { E4_16 = E4_16 +top.EDTI1[Base+i];}
+  T0 =0  ;for (var i= 1; i<=17 ; i++) { T0    = T0    +top.EDTI1[Base+i];}
+  C1=0;C1=C1+Math.max(0, top.EDTI1[Base+10] -M10 )
+            +Math.max(0, top.EDTI1[Base+13] -M10 )
+            +Math.max(0, top.EDTI1[Base+16] -M10 );
+  T1=T0-C1;
+
+  D0=T1-D1;
+  D2       = Math.min(                 D0  , M32 ); 
+  DX       = D1+D2;
+  DXX       = Math.min(DX,top.TRTI[top.EDIT_actual]);
+
+  top.TRTI[top.EDIT_actual]=top.EDTI1[Base+0];
+  top.DETI[top.EDIT_actual]=DXX;
+  top.RLTI[top.EDIT_actual]=top.EDTI1[Base+0]-DXX;
+
+}
+//////////////
+// ------------------------------------ABATIMENTOS-------End --------
+// End hiding -->
+</script>
+
+
+<frameset rows="8%,*">
+  <frame SRC="CalcImp.htm" NAME="CALC_IMP" MARGINHEIGHT="1" MARGINWIDTH="14">
+  <frameset cols="13%,*">
+    <frame SRC="frames99.htm" NAME="FRAMES" target="DADOS">
+    <frame SRC="Identifica.htm" NAME="DADOS" SCROLLING="auto" MARGINWIDTH="4" MARGINHEIGHT="3">
+  </frameset>
+  <noframes>
+  <body>
+  </body>
+  </noframes>
+</frameset>
+</html>
