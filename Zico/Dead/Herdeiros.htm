@@ -1,0 +1,415 @@
+<html>
+
+<head>
+<meta name="GENERATOR" content="Microsoft FrontPage 3.0">
+<title>Herdeiros</title>
+</head>
+
+<body OnLoad="start(1)">
+<script Language="JavaScript">
+<!-- Start Hiding from older browsers
+PCT      = new Array();
+PTE      = new Array();
+MdPct=top.ID[3];
+Disponivel=top.ID[18];
+for (var i= 0; i<=15; i++) {PCT[i]=0;PTE[i]=0;}
+
+function start(a){
+
+//alert("START");
+	Getdata1(0);
+}
+function Getdata1(a) {		
+//alert("START");
+/*
+   HE[1]=5000000; //Heranca
+   HE[2]=3;       //pct
+   HE[3]=150000;  //Bens pessoais
+*/
+
+document.formulario1.Heranca0.value         =top.HE[1]; /// top.Heranca;
+document.formulario1.Pessoal_Pct.value      =top.HE[2]; /// top.Heranca;
+document.formulario1.Pessoal.value          =top.HE[3]; /// top.Heranca;
+document.formulario1.PessoiasIncluidos.value=top.HE[4]; /// top.Heranca;
+
+document.formulario1.Heranca.value=top.ID[1]; /// top.Heranca;
+document.formulario1.testa.value=top.ID[2]; /// ;
+document.formulario1.MdPct.value=top.ID[3]+" %"; /// ;
+document.formulario1.MdPte.value=top.ID[4]; /// ;
+document.formulario1.DispPct.value=top.ID[5]+" %"; /// ;
+document.formulario1.DispPte.value=top.ID[6]; /// ;
+document.formulario1.Conjugue.value=top.ID[7]; //
+document.formulario1.Filhos.value=top.ID[8];// Filhos
+document.formulario1.AV.value=top.ID[9]; /// AV
+document.formulario1.IG.value=top.ID[10]; /// 
+document.formulario1.IU.value=top.ID[11]; /// 
+document.formulario1.Tios.value=top.ID[12]; ///
+document.formulario1.Primos.value=top.ID[13]; ///
+document.formulario1.who.value=top.ID[14];
+document.formulario1.PM.value=top.ID[17]; /// PM
+if (top.ID[15] == 0 ) {document.formulario1.who_pct.value="Nada";}
+                else {document.formulario1.who_pct.value=top.ID[15]+" %";}
+document.formulario1.who_pte.value=top.ID[16];
+document.formulario1.Disponivel.value=Math.round(Disponivel*100)/100;
+
+document.formulario1.Imposto.value=top.ID[19]; //
+document.formulario1.PP.value=top.ID[20]; //
+document.formulario1.PP1.value=top.ID[19]-top.ID[20]; //
+document.formulario1.NrPrestacoes.value=top.ID[21]; //
+document.formulario1.Prestacao.value=top.ID[22]; //
+
+
+}
+function calc_all(i,a){
+for (var i= 0; i<=15; i++) {PCT[i]=0;PTE[i]=0;}
+MdPct=100;
+ 
+/*
+<select name="who" size="1">
+        <option selected value="1">Estado</option>
+        <option value="2">Cônjugue</option>
+        <option value="3">Filho Maior</option>
+        <option value="4">Filho Menor</option>
+        <option value="5">Avô</option>
+        <option value="6">Pai</option>
+        <option value="7">Irmão Germano</option>
+        <option value="8">Irmão Unilateral</option>
+        <option value="9">Tio</option>
+        <option value="10">Primo</option>
+///////        <option value="10">Ben.Testamento</option>
+*/
+
+//alert("TEST:"+top.ID[7]);
+if (top.ID[7] == "1" )  {DC();} else {NDC();} //  Deixa CÔNJUGUE ??
+
+
+top.ID[3]=Math.round(MdPct*100)/100;
+top.ID[4]=Math.round(top.ID[1]*MdPct)/100;
+
+if (top.ID[6] > top.ID[4])
+{ alert ("Máximo disponível : "+top.ID[4]);
+  top.ID[6]=top.ID[4];
+}
+if (top.ID[2]=="1" & top.ID[6]>0 )
+{ alert ("Não fez testamento -> Não dispôs de nada ");
+  top.ID[6]=0; //and top.ID[6]>0 
+}
+
+top.ID[5]=Math.round(top.ID[6]*10000/top.ID[1])/100;
+
+Disponivel=top.ID[1]-top.ID[6];
+top.ID[18]=Disponivel;
+
+//   {top.ID[15]=0  ;alert("0");} 
+
+y=eval(top.ID[14])+1;//alert(y);
+if (y>3) {y=y-1;} // filho Maior ou menor é igual aqui
+//alert("X="+y);
+
+x=PCT[y];
+
+top.ID[15]=Math.round(x*100)/100;
+top.ID[16]=Math.round(Disponivel*x)/100;
+
+
+//top.ID[16]=Disponivel*x/100;
+
+//A_Pagar=
+//A_Pagare=
+top.Calc_imp(eval(top.ID[14]+1),top.ID[16]); // who_pte
+//alert(A_Pagare);
+
+Getdata1(1);
+}
+function DC() // Deixa CÔNJUGUE
+	{//alert("Deixa CÔNJUGUE ");
+	if (top.ID[8] == 0 ) {
+           //alert("Deixa CÔNJUGUE e Nao Tem Filhos");
+           DCNTF();
+                   } else {
+           //alert("Deixa CÔNJUGUE e Tem Filhos");
+           DCTF();} // Tem Filhos ??
+	}
+function DCNTF() // Deixa CÔNJUGUE e Nao Tem Filhos
+	{//alert("Deixa CÔNJUGUE e Nao Tem Filhos");
+        a=eval(top.ID[9]);p=eval(top.ID[17]);b=a+p;
+	if (b == 0 ) {DCNTFNTA();} else {DCNTFTA();} // Tem AV ??
+	}
+function DCNTFNTA() // Deixa CÔNJUGUE e Nao Tem Filhos e nao tem AV
+        	 {///alert("Deixa CÔNJUGUE , Nao Tem Filhos e nao tem AV");
+        	      PCT[2]=100; //Cônjugue
+                MdPct=50;//alert(MdPct);
+                 }
+function DCNTFTA() // Deixa CÔNJUGUE e Nao Tem Filhos e tem  AV
+        	 {
+        	PCT[2]=200/3          ; //Cônjugue (2/3)
+        	PCT[4]=100/3/top.ID[9]; //AV (1/3)/N
+                PCT[5]=PCT[4];
+                MdPct=100/3;
+                 }
+function DCTF() // Deixa CÔNJUGUE e Tem Filhos
+	{ n=eval(top.ID[8]);
+        MdPct=100/3;
+	if (n >2 ) {PCT[2]=25         ; //Cônjugue (1/4)
+                    PCT[3]=75/n       ; //Filhos (3/4) /n
+                   } else 
+                   {PCT[2]=100/(n+1)  ; //Cônjugue (1/4)
+                    PCT[3]=PCT[2]     ; //Filhos (3/4) /n
+                   } 
+	}
+//
+function NDC()
+	{      //alert("Nao Deixa CÔNJUGUE ");
+	if (top.ID[8] == 0 ) {
+           //alert("Não Deixa CÔNJUGUE e Nao Tem Filhos");
+           NDCNTF();
+                   } else { n=eval(top.ID[8]);
+           //alert("Nao Deixa CÔNJUGUE e Tem Filhos");
+                    PCT[3]=100/n  ; //  Filhos
+                    if ( n==1) {MdPct=100/2;} else {MdPct=100/3;}
+                   }
+	}
+function NDCNTF() // nao Deixa CÔNJUGUE e Nao Tem Filhos
+	{       //alert("Nao Deixa CÔNJUGUE e Nao Tem Filhos");
+	a=eval(top.ID[9]);p=eval(top.ID[17]);b=a+p;
+        if (b == 0 ) {NDCNTFNTA();} else {NDCNTFTA(a,p);} // Tem AV ??
+	}
+function NDCNTFTA(a,p) // NAO Deixa CÔNJUGUE e Nao Tem Filhos e tem  AV
+        	 {
+        	PCT[4]=100/top.ID[9]; //AV (1)/N
+                PCT[5]=PCT[4];
+                if (p==0) {MdPct=200/3} else {MdPct=100/2};                
+
+                 }
+function NDCNTFNTA() // Nao Deixa CÔNJUGUE e Nao Tem Filhos e Nao tem  AV
+     	 { // alert("Nao Deixa CÔNJUGUE e Nao Tem Filhos e Nao tem  AV");
+            g=eval(top.ID[10]);
+            u=eval(top.ID[11]);
+            i=2*g+u;//alert("I="+i);
+	    if (i == 0 ) { NDCNTFNTANTI();} else { NDCNTFNTATI(g,u,i);} // Tem Irmaos ??
+         }
+function NDCNTFNTANTI() // Deixa CÔNJUGUE e Nao Tem Filhos e Nao tem  AV nem Irmaos - TEm TIO PRIMOS
+      {n=eval(top.ID[12])+eval(top.ID[13]);//alert("TP:"+n);
+	if (n == 0 ) {PCT[1]=100;}    //alert("Tudo para o estado");
+              else { //alert("Tem TIOS/PRIMOS"); 
+        	PCT[8]=100/n; // (1)/N
+                PCT[9]=PCT[8];
+                   }
+      }
+function NDCNTFNTATI(g,u,i) // Deixa CÔNJUGUE e Nao Tem Filhos e Nao tem  AV ,TEM Irmaos 
+      {         //alert("TEM IRMAOS"+g+" "+u);
+        if (g>0 ) {	PCT[6]=2*100/(i);} // germano
+        if (u>0 ) {     PCT[7]=100/(i)  ;} //unilateral
+      }
+//
+function ChgValue(i,a){
+top.ID[i]=0+eval(a);
+calc_all(i,a);
+}
+function ChgValueHe(i,a){
+top.HE[i]=0+eval(a);
+top.HE[2]=3;
+if (top.HE[1]>=  500000) {top.HE[2]=6;}
+if (top.HE[1]>= 2500000) {top.HE[2]=9;}
+if (top.HE[1]>= 5000000) {top.HE[2]=12;}
+if (top.HE[1]>=10000000) {top.HE[2]=15;}
+top.HE[3]=Math.round(top.HE[1]*top.HE[2]/100);
+top.ID[1]=top.HE[1]+top.HE[3]-top.HE[4];
+calc_all(i,a);
+}
+
+function ChgIndex(i,a){
+top.ID[i]=a;
+//alert("AAA:"+a);
+calc_all(i,a);
+}
+// End hiding -->
+</script>
+
+
+<form name="formulario1">
+  <div align="left"><table border="1" width="600">
+    <tr>
+      <td width="172" align="right"><div align="right"><p>Total relação de bens : <br>
+      Bens Pessoais incluidos : </td>
+      <td width="144" align="center"><input type="text" name="Heranca0" size="11" value="1000"
+      onChange="ChgValueHe(1,this.value);"><strong>Esc.<br>
+      </strong><input type="text" name="PessoiasIncluidos" size="11" value="50"
+      onChange="ChgValueHe(4,this.value);"><strong>Esc.</strong></td>
+      <td width="266" colspan="2" rowspan="3"><div align="left"><table border="1" width="100%">
+        <tr>
+          <td width="50%"><div align="center"><center><p>Total Herança :</td>
+          <td width="25%" align="center"><input type="button" value="1000          " name="Heranca"></td>
+        </tr>
+      </table>
+      </div></td>
+    </tr>
+    <tr align="center">
+      <td align="right" width="172">Bens Pessoais :</td>
+      <td align="center" width="144"><div align="center"><center><p><input type="button"
+      value="3 %" name="Pessoal_Pct"> <strong><big>:</big></strong> <input type="button"
+      value="30         " name="Pessoal"></td>
+    </tr>
+    <tr align="center">
+      <td align="right" width="172">Deixou testamento:&nbsp; </td>
+      <td align="center" width="144"><select name="testa" size="1"
+      onChange="ChgIndex(2,this.selectedIndex);">
+        <option selected value="0">Sim</option>
+        <option value="1">Não</option>
+      </select></td>
+    </tr>
+    <tr align="center">
+      <td rowspan="2" width="172">&nbsp;<p>&nbsp;</td>
+      <td align="center" width="144">Máximo disponível :</td>
+      <td align="center" width="143"><input type="button" value="100%" name="MdPct"></td>
+      <td align="center" width="117"><input type="button" value="1000            " name="MdPte"></td>
+    </tr>
+    <tr align="center">
+      <td align="center" width="144">Dispôs de :<br>
+      </td>
+      <td align="center" width="143"><input type="button" value="100%" name="DispPct"></td>
+      <td align="center" width="117"><input type="text" value="1000" name="DispPte"
+      onChange="ChgValue(6,this.value);" size="11"></td>
+    </tr>
+    <tr align="center">
+      <td align="center" colspan="4" width="594"><small><small><small><small><small><small>&nbsp;
+      </small></small></small></small></small></small></td>
+    </tr>
+    <tr align="center">
+      <td align="center" width="172">Deixa cônjuge ?</td>
+      <td align="center" width="144"><select name="Conjugue" size="1"
+      onChange="ChgIndex(7,this.selectedIndex);">
+        <option selected value="0">Não</option>
+        <option value="1">Sim</option>
+      </select></td>
+      <td width="143"><div align="center"><center><p>Nr. de Filhos :</td>
+      <td align="center" width="117"><input type="text" name="Filhos" size="3" value="0"
+      onChange="ChgValue(8,this.value);"></td>
+    </tr>
+    <tr align="center">
+      <td align="center" width="172"><div align="center"><center><p>Nr. Pais Vivos&nbsp; </td>
+      <td align="center" width="144"><select name="PM" size="1"
+      onChange="ChgIndex(17,this.selectedIndex);">
+        <option selected value="0">Não</option>
+        <option value="1">1 Asc</option>
+        <option value="2">2 Asc</option>
+      </select></td>
+      <td align="center" width="133">Nr. Avós Vivos</td>
+      <td align="center" width="133"><select name="AV" size="1"
+      onChange="ChgIndex(9,this.selectedIndex);">
+        <option selected value="0">Não</option>
+        <option value="1">1 Asc</option>
+        <option value="2">2 Asc</option>
+        <option value="3">3 Asc</option>
+        <option value="4">4 Asc</option>
+        <option value="5">5 Asc</option>
+        <option value="6">6 Asc</option>
+        <option value="7">7 Asc</option>
+        <option value="8">8 Asc</option>
+      </select></td>
+    </tr>
+    <tr align="center">
+      <td width="172" align="center">Nr. Irmãos Germanos :</td>
+      <td align="center" width="144"><select name="IG" size="1"
+      onChange="ChgIndex(10,this.selectedIndex);">
+        <option selected value="0">Sem</option>
+        <option value="1">1</option>
+        <option value="2">2</option>
+        <option value="3">3</option>
+        <option value="4">4</option>
+        <option value="5">5</option>
+        <option value="6">6</option>
+        <option value="7">7</option>
+        <option value="8">8</option>
+        <option value="9">9</option>
+        <option value="10">10</option>
+        <option value="11">11</option>
+        <option value="12">12</option>
+        <option value="13">13</option>
+        <option value="14">14</option>
+        <option value="15">15</option>
+        <option value="16">16</option>
+        <option value="17">17</option>
+        <option value="18">18</option>
+        <option value="19">19</option>
+        <option value="20">20</option>
+      </select></td>
+      <td width="143" align="center">Nr. Irmãos Unilaterais</td>
+      <td align="center" width="117"><select name="IU" size="1"
+      onChange="ChgIndex(11,this.selectedIndex);">
+        <option selected value="0">Sem</option>
+        <option value="1">1</option>
+        <option value="2">2</option>
+        <option value="3">3</option>
+        <option value="4">4</option>
+        <option value="5">5</option>
+        <option value="6">6</option>
+        <option value="7">7</option>
+        <option value="8">8</option>
+        <option value="9">9</option>
+        <option value="10">10</option>
+        <option value="11">11</option>
+        <option value="12">12</option>
+        <option value="13">13</option>
+        <option value="14">14</option>
+        <option value="15">15</option>
+        <option value="16">16</option>
+        <option value="17">17</option>
+        <option value="18">18</option>
+        <option value="19">19</option>
+        <option value="20">20</option>
+      </select></td>
+    </tr>
+    <tr align="center">
+      <td align="center" width="172">Nr. Tios :</td>
+      <td align="center" width="144"><input type="text" name="Tios" size="3" value="0"
+      onChange="ChgValue(12,this.value);"></td>
+      <td width="143" align="center">Nr. Primos :</td>
+      <td align="center" width="117"><input type="text" name="Primos" size="3" value="0"
+      onChange="ChgValue(13,this.value);"></td>
+    </tr>
+    <tr align="center">
+      <td colspan="4" align="center" width="594">Disponível : <input type="button" value="1000"
+      name="Disponivel"></td>
+    </tr>
+    <tr align="center">
+      <td align="center" width="172"><big><u><strong>A sua situação :</strong></u></big></td>
+      <td align="center" width="144"><select name="who" size="1"
+      onChange="ChgIndex(14,this.selectedIndex);">
+        <option selected value="0">Estado</option>
+        <option value="1">Cônjugue</option>
+        <option value="2">Filho Maior</option>
+        <option value="3">Filho Menor</option>
+        <option value="4">Avô</option>
+        <option value="5">Pai</option>
+        <option value="6">Irmão Germano</option>
+        <option value="7">Irmão Unilateral</option>
+        <option value="8">Tio</option>
+        <option value="9">Primo</option>
+      </select></td>
+      <td width="143"><div align="center"><center><p>A sua Parte:</td>
+      <td align="center" width="117"><input type="button" value="Nada  " name="who_pct"><br>
+      <input type="button" value="0              " name="who_pte"></td>
+    </tr>
+    <tr align="center">
+      <td align="center" width="316" colspan="2">&nbsp;</td>
+      <td width="143"><div align="center"><center><p>Imposto a Pagar :</td>
+      <td align="center" width="117"><input type="button" value="0              " name="Imposto"></td>
+    </tr>
+    <tr align="center">
+      <td align="center" width="158">Pronto Pagamento:</td>
+      <td align="center" width="158"><big><big><strong>-</strong></big></big> <input
+      type="button" value="0            " name="PP"> <strong>??</strong><em> Teste<br>
+      </em><strong><big>=&gt;</big></strong><input type="button" value="0            "
+      name="PP1"></td>
+      <td width="143" valign="top"><div align="center"><center><p>Max&nbsp; de Prestações
+      Semestrais: <input type="button" value="0 " name="NrPrestacoes"></td>
+      <td align="center" width="117"><input type="button" value="0              "
+      name="Prestacao"></td>
+    </tr>
+  </table>
+  </div><div align="center"><center><p>&nbsp;</p>
+  </center></div>
+</form>
+</body>
+</html>

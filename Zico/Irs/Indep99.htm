@@ -1,0 +1,394 @@
+<html>
+
+<head>
+<meta name="GENERATOR" content="Microsoft FrontPage 3.0">
+<title>Indep99</title>
+</head>
+
+<body bgcolor="#ffffff" OnLoad="Getdata1(1)" OnUnload>
+<script language="JavaScript"><!--
+function Getdata1(a) {
+/*    for (var i= 0; i<=20 ; i++) { EDTI1[i]=0;} // 1999 : top.EDIT_actual*20+
+      for (var i= 0; i<=10 ; i++) { EDTI01[i]=0;} // 1999 
+top.EDIT_actual=1..5 
+*/
+Base=(top.EDIT_actual-1)*20;
+top.EDTI1[Base+0]=top.TRTI[top.EDIT_actual];
+//top.EDTI1[Base+0])=top.TRTI[x];
+Ch_all(1);
+}
+function Ch1(x,a) {
+//   alert(""+x+":"+a);
+   top.EDTI1[Base+x]=valorde(a);  //a;
+	Ch_all(x);
+}
+function Ch01(x,a) {
+//   alert(""+x+":"+a);
+   top.EDIT_actual=x;
+   top.EDTI01[Base+x]=valorde(a);  //a;
+	Ch_all(x);
+}
+function Ch02(x,a) {
+//   alert(""+x+":"+a);
+   top.EDTI02[Base+x]=valorde(a);  //a;
+	Ch_all(x);
+}
+
+function valorde(x) {
+if (x=="") {x="0"};
+	x=eval(""+x);
+if( (""+x)=="undefined") x=0; 
+return x;
+}
+function Ch_all(x) {
+
+top.TI_calc(x);
+
+  M32=325*top.EDTI1[Base+0]/1000;
+  M10=top.EDTI1[Base+0]/10;
+
+  top.EDTI1[Base+2]=top.EDTI01[Base+2]/2+top.EDTI02[Base+2];
+  top.EDTI1[Base+3]=top.EDTI01[Base+3]/2+top.EDTI02[Base+3];
+  top.EDTI1[Base+4]=top.EDTI01[Base+4]/2+top.EDTI02[Base+4];
+  top.EDTI1[Base+6]=top.EDTI01[Base+6]/2+top.EDTI02[Base+6];
+
+//  D1=0   ;for (var i= 1; i<=3 ; i++) { D1=D1+top.EDTI1[i];}
+  D1=top.EDTI1[Base+1]+top.EDTI1[Base+2]+top.EDTI1[Base+3]+top.EDTI1[Base+11]+top.EDTI1[Base+12]
+  E4_16=0;for (var i= 4; i<=16 ; i++) { E4_16 = E4_16 +top.EDTI1[Base+i];}
+  T0 =0  ;for (var i= 1; i<=17 ; i++) { T0    = T0    +top.EDTI1[Base+i];}
+  C1=0;C1=C1+Math.max(0, top.EDTI1[Base+10] -M10 )
+            +Math.max(0, top.EDTI1[Base+13] -M10 )
+            +Math.max(0, top.EDTI1[Base+16] -M10 );
+  T1=T0-C1;
+//  D2     = Math.min(                 E4_16  , M32 ); 
+  D0=T1-D1;
+  D2       = Math.min(                 D0  , M32 ); 
+  DX       = D1+D2;
+  DXX       = Math.min(DX,top.TRTI[top.EDIT_actual]);
+
+
+  top.TRTI[top.EDIT_actual]=top.EDTI1[Base+0];
+  top.DETI[top.EDIT_actual]=DXX;
+  top.RLTI[top.EDIT_actual]=top.EDTI1[Base+0]-DXX;
+
+	document.formulario1.BRUTO.value=top.EDTI1[Base+0]; 
+	document.formulario1.D1.value=D1;
+	document.formulario1.M32.value=M32; 
+   document.formulario1.D0.value=D0;
+	document.formulario1.D2.value=D2;
+	document.formulario1.DX.value=DX;
+	document.formulario1.DXX.value=DXX;
+
+	document.formulario1.E1.value=top.EDTI1[Base+1];
+
+
+	document.formulario1.E2.value=top.EDTI1[Base+2];
+	document.formulario1.V2.value=top.EDTI01[Base+2];
+	document.formulario1.O2.value=top.EDTI02[Base+2];
+
+
+	document.formulario1.E3.value=top.EDTI1[Base+3];
+	document.formulario1.V3.value=top.EDTI01[Base+3];
+	document.formulario1.O3.value=top.EDTI02[Base+3];
+
+	document.formulario1.E4.value=top.EDTI1[Base+4];
+	document.formulario1.V4.value=top.EDTI01[Base+4];
+	document.formulario1.O4.value=top.EDTI02[Base+4];
+
+	document.formulario1.E6.value=top.EDTI1[Base+6];
+	document.formulario1.V6.value=top.EDTI01[Base+6];
+	document.formulario1.O6.value=top.EDTI02[Base+6];
+
+	document.formulario1.T0.value=T0;
+	document.formulario1.C1.value=C1;
+	document.formulario1.T1.value=T1;
+
+	document.formulario1.M10_1.value=M10;
+	document.formulario1.M10_2.value=M10;
+	document.formulario1.M10_3.value=M10;
+}
+//document.write('<p align="center"><strong>');
+//document.write("13-Englobamento de Rendimentos "+(1996+top.ID[3])+"<BR></strong></p>");
+
+
+
+
+
+// -->
+</script>
+
+
+<form action="action1" method="OBTER" enctype="tipocodif1" name="formulario1"
+target="fram1" atribexp1="val1">
+  <div align="left"><table border="1" width="700" height="507">
+    <tr>
+      <td colspan="4" height="21" width="694"><div align="left"><table border="1" width="688"
+      cellspacing="0" cellpadding="0">
+        <tr>
+          <td width="28" rowspan="3" valign="top"><big><big><big><strong>7 </strong></big></big></big></td>
+          <td width="486" rowspan="3" valign="middle"><div align="center"><center><p><big><big><big><strong>ENCARGOS
+          DEDUTÍVEIS</strong></big></big></big></p>
+          </center></div><div align="center"><center><p><big><strong>( Trabalhadores Independentes )</strong></big></td>
+          <td width="162" align="center"><div align="left"><table border="3">
+            <tr>
+              <td>Bruto :</td>
+              <td bgcolor="#00FFFF"><input type="text" value="240000" name="BRUTO" size="10"
+              onchange="Ch1(0,this.value) "></td>
+            </tr>
+            <tr>
+              <td>D1: <small>1+2+3+11+12</small></td>
+              <td><div align="left"><p><input type="button" name="D1" size="10" value="0"></td>
+            </tr>
+            <tr>
+              <td><small>4&gt;10+13&gt;16</small></td>
+              <td><div align="center"><center><p><small><small><small><input type="button" name="D0"
+              size="10" value="0"></small></small></small></td>
+            </tr>
+            <tr align="center">
+              <td><small>32.5 % Max<small> :</small></small></td>
+              <td><div align="center"><center><p><small><small><small><input type="button" name="M32"
+              size="10" value="0"></small></small></small></td>
+            </tr>
+            <tr align="center">
+              <td>D2:</td>
+              <td><div align="center"><center><p><input type="button" name="D2" size="10" value="0"></td>
+            </tr>
+            <tr align="center">
+              <td bgcolor="#FF80FF"><small><small><small><input type="button" name="DXX" size="10"
+              value="0"></small></small></small></td>
+              <td><small><small><small><input type="button" name="DX" size="10" value="0"></small></small></small></td>
+            </tr>
+          </table>
+          </div></td>
+        </tr>
+        <tr align="center">
+          <td width="162" valign="top"><div align="left"></div></td>
+        </tr>
+      </table>
+      </div></td>
+    </tr>
+    <tr align="center">
+      <td colspan="2" width="353" height="21"><div align="left"><p><strong>1. Remuneracões e
+      encargos obrigatórios com empregados e colaboradores</strong></td>
+      <td width="174" height="21" valign="top"><div align="left"><p>17</td>
+      <td width="155" height="21" align="center" bgcolor="#00FFFF"><div align="center"><center><p><input
+      type="text" name="E1" size="10" value="0" onchange="Ch1(1,this.value)"></td>
+    </tr>
+    <tr align="center">
+      <td colspan="2" width="353" height="21"><div align="left"><p><strong>2. Rendas e outras
+      prestações devidas pela locação de instalações e equipamentos</strong></td>
+      <td width="174" height="21"><div align="left"><table border="0">
+        <tr>
+          <td align="center" bgcolor="#00FFFF">Viatura <input type="text" name="V2" size="10"
+          value="0" onchange="Ch01(2,this.value)"><small><small>50%</small></small></td>
+        </tr>
+        <tr>
+          <td align="center" bgcolor="#00FFFF"><div align="left"><p>Outros <input type="text"
+          name="O2" size="10" value="0" onchange="Ch02(2,this.value)">&nbsp;&nbsp;&nbsp; </td>
+        </tr>
+      </table>
+      </div></td>
+      <td width="155" height="21" align="center"><div align="center"><center><p><input
+      type="button" name="E2" size="10" value="0" onchange="Ch1(2,this.value)" </td> </td>
+    </tr>
+    <tr align="center">
+      <td colspan="2" width="353" height="21"><div align="left"><p><strong>3 Amortizações de
+      instalações e equipamentos, bem como das grandes reparações neles efectuadas</strong></td>
+      <td width="174" height="21"><div align="left"><table border="0">
+        <tr>
+          <td align="center" bgcolor="#00FFFF">Viatura <input type="text" name="V3" size="10"
+          value="0" onchange="Ch01(3,this.value)"><small><small>50%</small></small></td>
+        </tr>
+        <tr>
+          <td align="center" bgcolor="#00FFFF"><div align="left"><p>Outros <input type="text"
+          name="O3" size="10" value="0" onchange="Ch02(3,this.value)"></td>
+        </tr>
+      </table>
+      </div></td>
+      <td width="155" height="21"><div align="center"><center><p><input type="button" name="E3"
+      size="10" value="0" onchange="Ch1(3,this.value)" </td></td>
+    </tr>
+    <tr align="center">
+      <td colspan="2" width="353" height="21"><div align="left"><p>4. Prestações pagas por
+      força de contratos de locação financeira imobilária ou mobiliária, excluindo a parte
+      destinada a amortização financeira</td>
+      <td width="174" height="21"><div align="left"><table border="0">
+        <tr>
+          <td align="center" bgcolor="#00FFFF">Viatura <input type="text" name="V4" size="10"
+          value="0" onchange="Ch01(4,this.value)"><small><small>50%</small></small></td>
+        </tr>
+        <tr>
+          <td align="center" bgcolor="#00FFFF"><div align="left"><p>Outros <input type="text"
+          name="O4" size="10" value="0" onchange="Ch02(4,this.value)"></td>
+        </tr>
+      </table>
+      </div></td>
+      <td width="155" height="21"><div align="center"><center><p><input type="button" name="E4"
+      size="10" value="0" onchange="Ch1(4,this.value)" </td></td>
+    </tr>
+    <tr align="center">
+      <td colspan="2" width="353" height="21"><div align="left"><p>5. Pagamento de serviços
+      prestados por terceiros</td>
+      <td width="174" height="21"><div align="left"><p>21</td>
+      <td width="155" height="21" bgcolor="#00FFFF"><div align="center"><center><p><input
+      type="text" name="E5" size="10" value="0" onchange="Ch1(5,this.value)"></td>
+    </tr>
+    <tr align="center">
+      <td colspan="2" width="353" height="21"><div align="left"><p>6. Seguros (com excepção de
+      prémios de seguros de vida, doença ou acidentes pessoais)</td>
+      <td width="174" height="21"><div align="left"><table border="0">
+        <tr>
+          <td align="center" bgcolor="#00FFFF">Viatura <input type="text" name="V6" size="10"
+          value="0" onchange="Ch01(6,this.value)"><small><small>50%</small></small></td>
+        </tr>
+        <tr>
+          <td align="center" bgcolor="#00FFFF"><div align="left"><p>Outros <input type="text"
+          name="O6" size="10" value="0" onchange="Ch02(6,this.value)"></td>
+        </tr>
+      </table>
+      </div></td>
+      <td width="155" height="21"><div align="center"><center><p><input type="button" name="E6"
+      size="10" value="0" onchange="Ch1(6,this.value)"></td>
+    </tr>
+    <tr align="center">
+      <td colspan="2" width="353" height="21"><div align="left"><p>7. Consumos de água e de
+      energia</td>
+      <td width="174" height="21"><div align="left"><p>23</td>
+      <td width="155" height="21" bgcolor="#00FFFF"><div align="center"><center><p><input
+      type="text" name="E7" size="10" value="0" onchange="Ch1(7,this.value)"></td>
+    </tr>
+    <tr align="center">
+      <td colspan="2" width="353" height="21"><div align="left"><p>8. Comunicações</td>
+      <td width="174" height="21"><div align="left"><p>24</td>
+      <td width="155" height="21" bgcolor="#00FFFF"><div align="center"><center><p><input
+      type="text" name="E8" size="10" value="0" onchange="Ch1(8,this.value)"></td>
+    </tr>
+    <tr align="center">
+      <td colspan="2" width="353" height="21"><div align="left"><p>9. Bens de consumo
+      utilizáveis no exercício especifico da actividade profissional</td>
+      <td width="174" height="21"><div align="left"><p>25</td>
+      <td width="155" height="21" align="center" bgcolor="#00FFFF"><input type="text" name="E9"
+      size="10" value="0" onchange="Ch1(9,this.value)"></td>
+    </tr>
+    <tr align="center">
+      <td colspan="2" width="353" height="21"><div align="left"><p>10. Valorização e
+      representação profissional do sujeito passivo</td>
+      <td width="174" height="21"><div align="left"><p>26 - Máximo:<input type="button"
+      value="0" name="M10_1"></td>
+      <td width="155" height="21" align="center" bgcolor="#00FFFF"><input type="text" name="E10"
+      size="10" value="0" onchange="Ch1(10,this.value)"></td>
+    </tr>
+    <tr align="center">
+      <td colspan="2" width="353" height="21"><div align="left"><p><strong>11. Contribuições
+      obrigatórias para a segurança social do sujeito passivo</strong></td>
+      <td width="174" height="21"><div align="left"><p>27</td>
+      <td width="155" height="21" align="center" bgcolor="#00FFFF"><input type="text" name="E11"
+      size="10" value="0" onchange="Ch1(11,this.value)"></td>
+    </tr>
+    <tr align="center">
+      <td colspan="2" width="353" height="40"><div align="left"><p><strong>12.Quotizações para
+      ordens, sindicatos e outras organizações representativas de categorias profissionais
+      respeitantes ao sujeito passivo</strong></td>
+      <td width="174" height="40"><div align="left"><p>28</td>
+      <td width="155" height="21" align="center" bgcolor="#00FFFF"><input type="text" name="E12"
+      size="10" value="0" onchange="Ch1(12,this.value)"></td>
+    </tr>
+    <tr align="center">
+      <td rowspan="2" width="153" height="46"><div align="left"><p>13. Deslocações, viagens e
+      estadas</td>
+      <td width="194" height="21"><div align="left"><p>13.1 Do sujeito passivo</td>
+      <td width="174" height="21"><div align="left"><p>29 - Máximo:<input type="button"
+      value="0" name="M10_2"></td>
+      <td width="155" height="21" align="center" bgcolor="#00FFFF"><input type="text" name="E13"
+      size="10" value="0" onchange="Ch1(13,this.value)"></td>
+    </tr>
+    <tr align="center">
+      <td width="194" height="21"><div align="left"><p>13 2 Dos empregados</td>
+      <td width="174" height="21"><div align="left"><p>30</td>
+      <td width="155" height="21" align="center" bgcolor="#00FFFF"><input type="text" name="E14"
+      size="10" value="0" onchange="Ch1(14,this.value)"></td>
+    </tr>
+    <tr align="center">
+      <td colspan="2" width="353" height="40"><div align="left"><p>14. Importâncias recebidas a
+      título de provisão ou adiantamento que sejam&nbsp; despendidas no pagamento de despesas
+      ou outras &nbsp; obrigações da responsabilidade dos clientes</td>
+      <td width="174" height="40"><div align="left"><p>31</td>
+      <td width="155" height="21" align="center" bgcolor="#00FFFF"><input type="text" name="E15"
+      size="10" value="0" onchange="Ch1(15,this.value)"></td>
+    </tr>
+    <tr align="center">
+      <td colspan="2" width="353" height="21"><div align="left"><p>15. Outras despesas
+      indispensáveis á formação do rendimento</td>
+      <td width="174" height="21"><div align="left"><p>32- Máximo:<input type="button"
+      value="0" name="M10_3"></td>
+      <td width="155" height="21" align="center" bgcolor="#00FFFF"><input type="text" name="E16"
+      size="10" value="0" onchange="Ch1(16,this.value)"></td>
+    </tr>
+    <tr align="center">
+      <td colspan="2" width="353" height="21"><div align="left"><p>16. Seguros no âmbito de
+      profissões de desgaste rápido</td>
+      <td width="174" height="21"><div align="left"><p>33</td>
+      <td width="155" height="21" align="center" bgcolor="#00FFFF"><input type="text" name="E17"
+      size="10" value="0" onchange="Ch1(17,this.value)"></td>
+    </tr>
+    <tr align="center">
+      <td colspan="2" width="353" height="21"><div align="left"><p>17 TOTAL DOS ENCARGOS (1+2+
+      ...+ 16)</td>
+      <td width="174" height="21"><div align="left"><p>34</td>
+      <td width="155" height="21" align="center"><input type="button" value="0" name="T0"></td>
+    </tr>
+    <tr align="center">
+      <td colspan="2" width="353" height="21"><div align="left"><p>18. Correcções por excesso
+      dos limites legais (linhas l0,13.1 e 15)</td>
+      <td width="174" height="21"><div align="left"><p>35</td>
+      <td width="155" height="21" align="center"><input type="button" value="0" name="C1"></td>
+    </tr>
+    <tr align="center">
+      <td colspan="2" width="353" height="21"><div align="left"><p>19.TOTAL DOS ENCARGOS
+      DEDUTÍVEIS&nbsp; (17 -18)</td>
+      <td width="174" height="21"><div align="left"><p>36</td>
+      <td width="155" height="21" align="center"><input type="button" value="0" name="T1"></td>
+    </tr>
+  </table>
+  </div><div align="center"><center><table border="0" width="600">
+    <tr>
+      <td width="68">&nbsp; </td>
+      <td width="661" height="21"><div align="left"><table border="1" width="510">
+        <tr>
+          <td width="423" align="left"><div align="left"><p>- Exerce a actividade conjuntamente com
+          outros profissionais?</td>
+          <td width="79"><div align="center"><center><p><select name="K1" size="1">
+            <option value="Sim">Sim</option>
+            <option selected value="Nao">Nao</option>
+          </select> </td>
+        </tr>
+        <tr align="center">
+          <td width="502" align="left" colspan="2"><div align="left"><p>Se respondeu Sim. tenha em
+          atencão que os encargos dedutíveis deverão ser rateados segundo o n ° 2 do art 26 °
+          do CIRS</td>
+        </tr>
+        <tr align="center">
+          <td width="423" align="left"><div align="left"><p>- Possui viatura afecta ao exercicio da
+          actividade?</td>
+          <td width="79"><div align="center"><center><p><select name="K2" size="1">
+            <option value="Sim">Sim</option>
+            <option selected value="Nao">Nao</option>
+          </select></td>
+        </tr>
+        <tr align="center">
+          <td width="502" align="left" colspan="2"><div align="left"><p>Se respondeu Sim, indique a
+          respectiva matricula <input type="text" name="Mat" size="9"> e tenha em atenção que as
+          deduções dos n.<sup>os</sup> &nbsp; 2. 3, 4 e 6, referentes a viaturas, são inscritas
+          em 50%&nbsp; ( nº 4 do art 26.º do ClRS)</td>
+        </tr>
+      </table>
+      </div></td>
+    </tr>
+  </table>
+  </center></div><div align="center"><center><table border="0">
+  </table>
+  </center></div><div align="center"><center><p>. </p>
+  </center></div>
+</form>
+</body>
+</html>

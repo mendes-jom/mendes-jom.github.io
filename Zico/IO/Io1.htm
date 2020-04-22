@@ -1,0 +1,768 @@
+<html>
+
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+<title>New Page 2</title>
+<meta name="GENERATOR" content="Microsoft FrontPage 4.0">
+<meta name="ProgId" content="FrontPage.Editor.Document">
+</head>
+
+<!--webbot bot="HTMLMarkup" startspan TAG="XBOT" --></SCRIPT><!--webbot bot="HTMLMarkup" endspan -->
+<script LANGUAGE="JavaScript">
+<!-- Start hiding from older browsers ------------ Start
+//-----------------------------------------------------
+top.MaxM=10; // Número máximo de incógnitas a tratar X2 .. X10
+top.MaxN=10; // Número máximo de lignas (equações) a tratar 
+
+
+function SetCols(cols){  this.NrCols=cols; }
+function GetCols(){  return (this.NrCols); }
+function Set(Row,Col,value) { 	    this[ (Row-this.Base) * this.Cols + (Col-this.Base) ] = value ;}
+function Get(Row,Col) { 	       s=(Row-this.Base) * this.NrCols + (Col-this.Base);return( this[ s ] ) ;}
+function ArrDisplay(Row,Col) { 	alert( this.Get(Row,Col) ) ;}
+function ArrDisplayAll() { 	document.write(this.Count);for( i=0; i< this.Count ; i++) document.write( ': ' + this[i]   )      ;} 
+function AArrDisplayAll() { 	
+	for( i=0; i< this.NrRows ; i++){
+		document.write(i);
+		for( j=0; j< this.NrCols ; j++) document.write( ': ' + this[i][j]   )      ;
+	} 
+//	document.write('<BR>');
+}
+
+function Arr(cols){
+//	this.Count =Arr.arguments.length;
+	this.Base=1;
+//	for ( var i=0 ; i<=this.Count; i++ ) this[i]=Arr.arguments[i];
+//	this.NrRows=1;
+	this.NrCols=top.cols;//this.Count;
+	this.SetCols=top.SetCols;
+	this.GetCols=top.GetCols;
+	this.Get=top.Get;
+	this.Set=top.Set;
+	this.Display=top.ArrDisplay;
+	this.DisplayAll=top.ArrDisplayAll;
+	this.Zero=top.ArrZero;
+}
+function Det(){
+//	alert("this.NrRows:"+this.NrRows);
+	d=0;r=this.NrRows;c=this.NrCols;
+	//if (this.NrRows !=this.NrCols ) return ("ERR");
+	for ( j=this.Base ; j<=this.NrCols ; j++ ){
+		mr=1;ml=1;
+		for ( i=1 ; i<= this.NrRows; i++ ) 
+		{ 
+			kr= j + i ; kr -- ; if ( kr*1 > this.NrCols ) kr -= c;
+			kl= j - i ; kl =eval(kl + 1) ; if ( kl  < 1 ) kl = eval(kl) + eval( c);
+			alert("+*A "+kr+i+"  -  *A "+kl+"  "+i);
+			mr *= this.GetElementAt(kr*1,i);
+			ml *= this.GetElementAt(kl*1,i);
+			
+		}
+		d += mr-ml ;
+	}
+	alert("Determinate de Ab = "+d);
+	return (d);	
+}
+function DetXY(x,y){
+//alert("this.NrRows:"+this.NrRows+" -"+this.NrCols);
+
+//	alert("DetXY(x,y)"+ x +y);
+	d=0;r=this.NrRows;c=this.NrCols;
+
+	//if (this.NrRows !=this.NrCols ) return ("ERR");
+	for ( j=1 ; j<=this.NrCols ; j++ ){
+
+		mr=1;ml=1;
+		var i;
+		for ( i=1 ; i<= this.NrRows; i++ ) 
+		{ 
+
+			kr= j + i ; kr -- ; if ( kr*1 > this.NrCols ) kr -= c;
+			kl= j - i ; kl =eval(kl + 1) ; if ( kl  < 1 ) kl = eval(kl) + eval( c);
+
+//			alert("+*A "+kr+i+"  -  *A "+kl+"  "+i);
+			
+//			if ( kr != x && i !=y  )  { mr *= this.GetElementAt(kr*1,i); }  // alert("+*A "+kr+i );}
+//			if ( kl != x && i !=y  )  { ml *= this.GetElementAt(kl*1,i); } //alert("+*A "+kl+i );}
+
+			if ( kr != x && kr !=y  )  { mr *= this.GetElementAt(kr*1,i); }  // alert("+*A "+kr+i );}
+			if ( kl != x && kl !=y  )  { ml *= this.GetElementAt(kl*1,i); } //alert("+*A "+kl+i );}
+
+
+		
+		}
+
+		d += mr-ml ;
+
+	}
+	
+	alert("Determinante de Ab = "+d);
+	return (d);	
+}
+function Inverted(){
+	d=this.Det();
+	tmp= new top.AArr(this.NrRows,this.NrCols);
+	//tmp.CopyFrom(this);
+	alert("OK");
+	var i,j,a;
+	for ( i=1 ; i<=this.NrCols; i++ )
+		for ( j=1 ; j<=this.NrRows; j++ ) 
+			{
+ 			a=this.DetXY(i,j);
+			a=a/d;
+//				tmp.SetElementAt(i,j,a) );
+				tmp.SetElementAt(j,i,a*Math.pow(-1,i+j) );//*this.DetXY(i,j)
+			
+			
+			}		
+	 alert("BB");
+	 tmp.SetCols(this.NrCols);
+	 tmp.SetRows(this.NrRows);
+
+	 return(tmp);
+	//return(tmp.Transposed());
+
+}
+
+function AArr(rows,cols){
+//	this[1] = new top.Arr();
+	this.Base=1;
+	this.NrRows=rows;
+	this.NrCols=cols;
+	for ( i=0 ; i<=this.NrRows; i++ ) 
+		{
+		 this[i]= new top.Arr(cols); //i*10+1,i*10+2,i*10+3
+	//	 for ( j=1 ; j<=this.cols; j++ )  this[j].SetCols(cols);
+		}
+//	---------------------------
+	this.SetCols=top.SetCols;
+	this.SetRows=top.SetRows;
+	this.GetCols=top.GetCols;
+	this.GetRows=top.GetRows;
+	this.SetLine=top.SetLine;
+	this.SetElementAt=top.SetElementAt;
+	this.GetElementAt=top.GetElementAt;
+	this.GetColumn=top.GetColumn;
+	this.GetNColumns=top.GetNColumns;
+	this.Invert=top.Invert;
+	this.Mult=top.Mult;
+	this.Sub=top.Sub;
+	this.SetColumn=top.SetColumn;
+	this.DisplayAll=top.AArrDisplayAll;
+	this.CopyFrom=top.CopyFrom;
+	this.SayRow=top.SayRow;
+	this.Zero=top.AArrZero;
+	this.MultByN=top.MultByN;
+	this.Transposed=top.Transposed;
+	this.Fill=top.Fill;
+	this.Det=top.Det;
+	this.DetXY=top.DetXY;
+	this.Inverted=top.Inverted;
+
+
+}
+
+
+function Transposed(){
+	tmp= new top.AArr(this.NrCols,this.NrRows);
+	for ( i=1 ; i<=this.NrCols; i++ )
+		for ( j=1 ; j<=this.NrRows; j++ ) 
+		  {tmp.SetElementAt(i,j,(this.GetElementAt(j,i))  );}
+	
+return(tmp);
+}
+function Sub(A){
+var f ;
+//alert ("SUB");
+	for ( i=1 ; i<=A.GetRows(); i++ )
+		for ( j=1 ; j<=A.GetCols(); j++ ) 
+		  {
+		  f= this.GetElementAt(i,j) - A.GetElementAt(i,j) ;
+		  this.SetElementAt(i,j,f  );
+//		  alert (i+"-"+j+"-" + f);
+		  }
+	
+}
+
+function Mult(A,B) {
+var f,i,j;
+//alert ("Start");
+tmp= new top.AArr(A.GetRows(),B.GetCols());
+	for ( i=1; i<= B.GetCols();i++)
+		for ( j=1; j<=A.GetRows();j++) //A.lines
+		{	
+			f=0;
+			for (k=1 ; k<=B.GetRows(); k++) 
+			{
+			f = f + A.GetElementAt(j,k) * B.GetElementAt(k,i);
+
+//			alert("ijk "+i+j+k+" : "+A.GetElementAt(j,k)+ " + " + B.GetElementAt(k,i)+ " = "+ f );
+
+			}
+			tmp.SetElementAt(j,i,f);//top.Round(f,10)
+	
+		}
+	tmp.NrCols=B.GetCols();
+return(tmp);
+}
+function ArrZero(){  for ( 1=1 ; 1<=this.NrCols; 1++ ) this[1]=0;   }
+function AArrZero(){ 
+	for ( i=1 ; i<=this.NrRows; i++ )	{ for ( j=1 ; j<=this.NrCols; j++ ) this.SetElementAt(i,j,0);}   }
+function Fill(f){ for ( 1=1 ; 1<=this.NrCols; 1++ ) for ( j=1 ; j<=this.NrRows; j++ ) this.SetElementAt(i,j,f);   }
+
+function SayRow(f,r,s,e) { // FrameNr,Row,Start,End
+							 //(A,n,r,s,e) { // ArrayName,nColumns,Row,Start,End
+	for ( i= s ; i<=e; i++) {
+							 //	    v=ArrGet(A,n,r,i);
+	    v=this.GetElementAt(r,i);if (typeof v =="undefined") v="  " ;
+//	    alert('  <td width="213" height="25" align="right"><input type="button" value="'+ v +'"></td>');
+		frames[f].document.write('  <td width="213" height="25" align="right"><input type="button" value="'+ Round(v,8) +'"></td>');
+		
+			}
+}
+
+function CopyFrom(aAArr){
+//alert("CopyFrom");
+//	this.Base=aAArr.Base;
+//	alert ("RowsBefore:"+this.NrRows);
+	for ( i=1+this.NrCols ; i<=this.NrRows; i++ ){ this[i]= new top.Arr(this.NrCols);}
+	this.NrRows=aAArr.NrRows;
+	this.NrCols=aAArr.NrCols;
+//	alert ("Rows"+this.NrRows);
+//	alert ("Cols"+this.NrCols);
+
+	for ( i=1 ; i<=this.NrRows; i++ ){ ///	   	
+//	alert("Copy:"+i);
+	   	for ( j=1 ; j<=this.NrCols; j++ ) { v=aAArr.GetElementAt(i,j); if (typeof v !="undefined") this.SetElementAt( i,j,v ) ;  } 
+	   }
+
+}
+
+function SetRows(rows){  this.NrRows=rows; }
+function GetRows(){  return (this.NrRows); }
+function SetColumn(icole, B) {
+//	lines=this.NrRows;
+	for ( i=1; i<= this.NrRows ;i++)
+	this.SetElementAt(i,icole,B.GetElementAt(i,1) );
+} 
+function MultByN(n){
+//alert(this.NrN);
+	for ( i=1; i<=this.NrRows ;i++)
+		for ( j=1; j<=this.NrCols;j++ ) 
+		{
+			l=this.GetElementAt(i,j);
+			this.SetElementAt(i,j,l*n);
+		}
+
+}
+function Invert(){ 
+	lines=this.NrRows;	
+
+	nr=top.NrN;///this.NrRows;
+	tmp= new top.AArr(nr,nr);
+
+	var i,j,k;
+	
+	for ( i=1; i<= nr; i++)
+	for ( j=1; j<= nr; j++)
+		if (i==j) tmp.SetElementAt(i,j,1.0000); else tmp.SetElementAt(i,j,0.00000);
+	var elem,base;
+
+	for (j=1; j<= nr; j++)
+	{   
+			base=	this.GetElementAt(j,j);
+
+			base6=top.Round(base,6)*1;
+			IsNotNumber= (typeof base6 != "number" )
+//			alert(j+"IsNotNumber:"+IsNotNumber);
+//			alert(j+"base6:"+base6+ ":" +IsNotNumber ) ;
+			if ( (base6 == 0) || IsNotNumber )
+			{
+//				alert(j+" :Sarted bb," + base6 );
+				bb=j*1+1;while ( (bb<=nr) && (top.Round(this.GetElementAt(bb,j),6) ==0 )) bb++;
+				if (bb>nr) alert("Not Found -- Irregular Matrix to invert");
+					else 	{
+//								alert(j+" Found 1  at : "+bb);
+//*****************
+/*
+	tt=" ";
+		for (k=1; k <= nr;k++) {for (kk=1; kk <= nr;kk++) 	tt=tt+"::"+this.GetElementAt(k,kk);
+		tt +="\t:-:";
+			for (kk=1; kk <= nr;kk++) 	tt=tt+"::"+tmp.GetElementAt(k,kk);
+			tt +="\n";
+			}
+			alert(	j+"Antes -"+i+" elem:"+elem+"\n"+tt);
+*/
+//****************************
+//								k=2;
+//								sss=this.GetElementAt(j,k)*1 + 1*parseFloat( this.GetElementAt(bb,k)) ;
+//								alert(j+k+" : " +this.GetElementAt(j,k)+" + "+parseFloat( this.GetElementAt(bb,k)) + " = " + sss );
+								for (k=1; k <= nr;k++) 
+								{
+									
+									this.SetElementAt(j,k,(this.GetElementAt(j,k))*1 +parseFloat( this.GetElementAt(bb,k)))  ;
+								 	 tmp.SetElementAt(j,k,( tmp.GetElementAt(j,k))*1 +parseFloat(  tmp.GetElementAt(bb,k))) ;
+								}
+//*****************
+/*
+	tt=" ";
+		for (k=1; k <= nr;k++) {for (kk=1; kk <= nr;kk++) 	tt=tt+"::"+this.GetElementAt(k,kk);
+		tt +="\t:-:";
+			for (kk=1; kk <= nr;kk++) 	tt=tt+"::"+tmp.GetElementAt(k,kk);
+			tt +="\n";
+			}
+		alert(	j+"Depois -"+i+" elem:"+elem+"\n"+tt);
+*/
+//****************************
+								
+								
+							}
+			} //else alert("Ok");
+
+//			alert("Ok-passei");
+
+			tt=" ";
+		for ( i=1; i<= nr;i++)
+		{
+			base=	this.GetElementAt(j,j);
+			
+			// trata primeiro i==j:
+			for (k=nr; k >= j;k--) this.SetElementAt(j,k,this.GetElementAt(j,k) /base);
+			for (k=nr; k >= 1;k--) tmp.SetElementAt(j,k,tmp.GetElementAt(j,k) /base);
+			elem=this.GetElementAt(i,j);
+			if (i==j) 
+				{	//cout <<"EQUAL";	 			
+				}
+			else
+			{	//cout << i<< " NOT EQUAL"<<j <<endl;
+				base=-elem;
+				//	cout <<"Base:" << base <<endl;
+				{ //SetElementAt(i,j,elem- base * GetElementAt(i,1) );
+				
+//				for (k=j; k <= nr;k++) this.SetElementAt(i,k,this.GetElementAt(i,k)+base*this.GetElementAt(j,k)); //j,k));
+//				for (k=1; k <= nr;k++) tmp.SetElementAt(i,k, tmp.GetElementAt(i,k)+base* tmp.GetElementAt(j,k));
+
+				for (k=j; k <= nr;k++) this.SetElementAt(i,k,(this.GetElementAt(i,k))*1 +parseFloat( base*this.GetElementAt(j,k))); //j,k));
+				for (k=1; k <= nr;k++)  tmp.SetElementAt(i,k,( tmp.GetElementAt(i,k))*1 +parseFloat( base* tmp.GetElementAt(j,k)));
+
+
+				}
+
+			}
+//*****************
+/*
+	tt=" ";
+		for (k=1; k <= nr;k++) {for (kk=1; kk <= nr;kk++) 	tt=tt+"::"+this.GetElementAt(k,kk);
+		tt +="\t:-:";
+			for (kk=1; kk <= nr;kk++) 	tt=tt+"::"+tmp.GetElementAt(k,kk);
+			tt +="\n";
+			}
+		alert(	j+"-"+i+" elem:"+elem+"\n"+tt);
+		*/
+//****************************
+			
+			
+		}
+
+	}
+	
+//	this.SayRow(1,1,1,3);
+//	this.SayRow(1,2,1,3);
+//	this.SayRow(1,3,1,3);
+
+	for (i=1; i<= nr;i++)
+	for ( j=1; j<= nr;j++)
+	this.SetElementAt(i,j,tmp.GetElementAt(i,j) );
+}
+//******************
+
+function GetColumn(icole) {
+	tmp= new top.AArr(this.NrRows,1);
+	for ( i=1; i<= this.NrRows;i++)
+	tmp.SetElementAt(i,1,GetElementAt(i,icole) );
+	return (tmp);
+} 
+function GetNColumns(NR ){
+	tmp= new top.AArr(this.NrRows,this.NrCols);
+	for ( i=1; i<= this.NrRows;i++){
+
+		for ( j=1; j<= NR.GetCols();j++)	{k=NR.GetElementAt(1,j);tmp.SetElementAt(i,j,  this.GetElementAt(i,k) );	} //alert("AA"+i+j);
+		}
+	return (tmp);
+} 
+//function SetElementAt(iline,icol,value){ 	alert("SEt"+iline+ ":" +icol+":"+value);this[iline][icol]=value; alert("IS:"+this[iline][icol]);}
+function SetElementAt(iline,icol,value){ this[iline][icol]=value; }
+
+function SetLine(line,cols,anArr){
+//	this[line]=anArr;
+	for ( i=1; i<= this.NrCols;i++) 	{ this.SetElementAt( line,i,anArr.GetElementAt(i) );	}
+}
+
+function GetElementAt(iline,icol) {	return (this[iline][icol]); } 
+function Round(n,p){v=Math.pow(10,p);  
+	//if (typeof v =="undefined") return (0); else 	
+	return (  Math.round(n* v )/ v) ; 
+} //Math.round(n* 10^p )/ 10^p)
+function Entra(fram,Scr,L,C){
+	var best=0,besti=0;
+	 	if (Scr == "Y" ) 	 	frames[fram].document.write('<BR>Podem entrar  na Base :');
+		for ( i= 1; i<=top.ArrC_M; i++) {
+				One =Round(C.GetElementAt(1,i),6);//alert(i+"-"+One);
+//			  alert("i: "+i+"  -  "+C.GetElementAt(1,i));
+			  	if ( One  < 0 ) {//top.ArrC
+			  
+					if (Scr == "Y" ) frames[fram].document.write(' : ' + top.XorS(i) );
+					if (Math.abs(One) > best ) { besti = i;best=Math.abs(One); }//top.ArrC
+			  	}
+		}
+	if ( (besti > 0) && (Scr == "Y") ) frames[fram].document.write(':<BR>A melhor escolha é : '+top.XorS(besti) ); //if ( (besti > 0) && (Scr == "Y") )
+	return (besti );
+}
+function EntraAlt(fram,Scr,L,C){
+//alert("EntraAlt");
+	var best=0,besti=0;
+	 	if (Scr == "Y" ) 	 	frames[fram].document.write('<BR>Podem entrar  na Base :');
+		ii=top.NrM *1 + 1;
+		for ( i= ii; i<=top.ArrC_M; i++) {//top.top.ArrC_M
+//			  alert("i: "+i+"  :"+top.Round(C.GetElementAt(1,i),6)+":");
+
+				Found=false;for ( iii= 1; iii<=top.NrN; iii++)  if (top.LFT.GetElementAt(iii,1)==i) Found=true;
+
+			  if ( !Found && top.Round(C.GetElementAt(1,i),6) == 0) {//top.ArrC
+			  	besti = i;
+				if (Scr == "Y" ) frames[fram].document.write(' : ' + top.XorS(i) );
+//				if (Math.abs(C.GetElementAt(1,i)) > besti ) { besti = i; }//top.ArrC
+ 	
+			  }
+		}
+	if ( (besti > 0) && (Scr == "Y") ) frames[fram].document.write(':<BR>A melhor escolha é : '+top.XorS(besti) ); //if ( (besti > 0) && (Scr == "Y") )
+	return (besti );
+}
+
+function Sai(fram,Scr,c,L,A,B,Q){
+	var best=100000000000,besti=0;
+	f=0;
+//alert("B   "+best);
+
+		for ( i= 1; i<=top.NrN; i++) {
+			g=A.GetElementAt(i,c);//alert(i+"-"+g);
+			if ( g > 0 ){
+				f=top.Round( B.GetElementAt(i,1)/g ,10 );
+				Q.SetElementAt(i,1,f);
+			  	if (f < best) { besti = i; best = f;
+			  	}
+			} else Q.SetElementAt(i,1,"-");
+		}
+//alert("Bb   "+besti);
+		if ( besti>0 ){
+		 	if (Scr == "Y" ) frames[fram].document.write('<BR>Podem sair da Base com Q='+best);
+			for ( i= top.NrN; i>=1; i--) {
+				if (Q.GetElementAt(i,1) == best) {
+					if (Scr == "Y" ) frames[fram].document.write(' : ' + top.XorS(L.GetElementAt(i,1)) );
+						besti=i;
+					}		
+			}
+		}
+ return (besti );
+}
+function NewChoice(fram){
+ 	Fwrite('  <p><br>');
+	for ( i= 1; i<=top.NrN; i++) {
+		Fwrite('Variável Básica '+i+" : ");
+	 	Fwrite('  <select size="1" onChange="top.ChLFT('+i+',1+this.selectedIndex)" >');
+		for ( n= 1; n<=top.ArrC_M; n++) {
+		 	Fwrite('  <option ');
+		 	if (top.LFT.GetElementAt(i,1) == n )  Fwrite( ' selected ');
+		 	Fwrite('>'+ top.XorS(n)  +'</option>');
+		}
+	 	Fwrite('  </select><BR>');
+ 	}
+}
+function Fwrite(texto){frames[1].document.write(texto) ;}
+function Exe2(){
+	alert("exe2");
+	top.NrM=3;
+	top.NrN=3;
+	top.ArrCC.SetElementAt(1,1,10);top.ArrCC.SetElementAt(1,2,12);top.ArrCC.SetElementAt(1,3,14);
+
+	top.ANM.SetElementAt(1,1,2);top.ANM.SetElementAt(1,2,2);top.ANM.SetElementAt(1,3,1);
+	top.ANM.SetElementAt(2,1,2);top.ANM.SetElementAt(2,2,3);top.ANM.SetElementAt(2,3,1);
+	top.ANM.SetElementAt(3,1,1);top.ANM.SetElementAt(3,2,1);top.ANM.SetElementAt(3,3,5);
+	top.TIN.SetElementAt(1,1,9);top.TIN.SetElementAt(2,1,12);top.TIN.SetElementAt(3,1,10);
+
+}
+function Exe1(){
+alert("exe1");
+	top.NrM=2;
+	top.NrN=2;
+	top.ArrCC.SetElementAt(1,1,600);top.ArrCC.SetElementAt(1,2,1000);
+	top.ANM.SetElementAt(1,1,1);top.ANM.SetElementAt(1,2,1.8);
+	top.ANM.SetElementAt(2,1,0.5);top.ANM.SetElementAt(2,2,0.6);
+	top.TIN.SetElementAt(1,1,40);top.TIN.SetElementAt(2,1,80);
+
+}
+function Exe3(){
+alert("exe3");
+	top.NrM=2;
+	top.NrN=3;
+	top.ArrCC.SetElementAt(1,1,3);top.ArrCC.SetElementAt(1,2,2);
+	top.ANM.SetElementAt(1,1,-1);top.ANM.SetElementAt(1,2,2);
+	top.ANM.SetElementAt(2,1,3);top.ANM.SetElementAt(2,2,2);
+	top.ANM.SetElementAt(3,1,1);top.ANM.SetElementAt(3,2,-1);
+
+	top.TIN.SetElementAt(1,1,4);top.TIN.SetElementAt(2,1,14);top.TIN.SetElementAt(3,1,3);
+
+
+}
+
+//-----------------------------------------------------
+
+top.NrM=3;
+top.NrN=3;
+
+top.SIN     = new Array();
+top.TIN     = new top.AArr(top.MaxN,1);
+top.ArrCC   = new top.AArr(1       ,top.MaxM);
+top.ANM     = new top.AArr(top.MaxM,top.MaxM);
+top.LFT     = new top.AArr(top.MaxM,1);
+top.MAX	  = 1;
+
+top.MaxMin=1;
+if (top.MAX == 2) top.MaxMin=-1;
+
+top.ArrCC.Zero();
+top.ANM.Zero();
+top.TIN.Zero();
+for (n= 1; n<=top.MaxN; n++) { top.SIN[n]=2;  }
+//alert("OK");
+
+top.ArrLFT  = new top.AArr(top.MaxM,  1  );
+top.ArrLFT.CopyFrom(top.LFT);
+top.LFT.SetRows(top.NrN);
+
+Exe3();
+//var v=top.NrN;
+//for ( n= 1; n<=top.MaxM; n++) { top.LFT.SetElementAt(n,1, ++v ); }  //n + top.NrM
+
+//for (n= 0; n<=top.MaxN; n++) { top.TIN[n]=0;  }
+//top.ArrCC.SetElementAt(1,1,600);top.ArrCC.SetElementAt(1,2,1000);
+//top.ANM.SetElementAt(1,1,1);top.ANM.SetElementAt(1,2,1.8);
+//top.ANM.SetElementAt(2,1,0.5);top.ANM.SetElementAt(2,2,0.6);
+
+//top.ArrCC.SetElementAt(1,1,10);top.ArrCC.SetElementAt(1,2,12);top.ArrCC.SetElementAt(1,3,14);
+
+//top.ANM.SetElementAt(1,1,2);top.ANM.SetElementAt(1,2,2);top.ANM.SetElementAt(1,3,1);
+//top.ANM.SetElementAt(2,1,2);top.ANM.SetElementAt(2,2,3);top.ANM.SetElementAt(2,3,1);
+//top.ANM.SetElementAt(3,1,1);top.ANM.SetElementAt(3,2,1);top.ANM.SetElementAt(3,3,5);
+
+//top.TIN.SetElementAt(1,1,40);top.TIN.SetElementAt(2,1,80);
+//top.TIN.SetElementAt(1,1,9);top.TIN.SetElementAt(2,1,12);top.TIN.SetElementAt(3,1,14);
+
+//alert("Teste TIN : "+top.TIN.GetElementAt(1,1)+" -"+top.TIN.GetElementAt(2,1) );
+
+
+
+//alert(top.ANM[1]);
+
+
+//alert("Start"+top.NrN);
+  
+////////////// ---- Start.htm
+function Ch_NrM(x,a) {
+
+	if (x==1) top.NrM=a;
+	if ( top.NrM > top.MaxM ) {alert ("Maximo, nesta versão," +top.MaxM + " incógnitas" );top.NrM=top.MaxM ;}
+	if ( top.NrM < 2 ) {alert ("Mínimo : 2 incógnitas" );top.NrM=2 ;}
+		   
+	if (x==2) top.NrN=a;
+	if ( top.NrN > top.MaxN ) {alert ("Maximo, nesta versão," +top.MaxN + " lignas " );top.NrN=top.MaxN ;}
+	if ( top.NrN < 1 ) {alert ("Mínimo : 1 ligna" );top.NrM=1 ;}
+	var v=top.NrM;
+	top.LFT.SetRows(top.NrN);
+	for ( n= 1; n<=top.NrN; n++) { top.ArrLFT.SetElementAt( n,1, ++v ); }  //n + top.NrM         v=(1*top.NrM)+(1*n);
+
+
+}
+////////////// ----
+function ChXXX(n,m,a) {
+	top.ArrCC.SetElementAt( 1 , m , a);
+	ChANM(n,m,a);
+}
+function ChLFT(n,a) {	
+	top.LFT.SetElementAt(n,1,a);
+	e=0;
+	for ( i=1; i<= top.LFT.NrN;i++)
+		for ( j=i+1; j<= top.LFT.NrN ;j++)	{  if ( top.LFT.GetElementAt(i,1)  == top.LFT.GetElementAt(j,1) )  e++ ;	}
+	if (e !=0 ) 	alert("Erro : Há escolhas iguais " +e);
+//	else alert(e);
+}
+
+function ChANM(n,m,a) {//	alert (" n , m , a"+ n +":"+m +":"+ a);
+	top.ANM.SetElementAt( n , m , a);
+}
+function ChTIN(n,a) {	top.TIN.SetElementAt( n , 1 , a); }
+function ChSIN(n,a) {	
+		alert(" Ainda não trata esses casos\nSó no ecran...\nEspere pela próxima versão..."); 
+		//top.SIN[n]=a;
+		 }
+function ChMAX(a) {	
+		top.MAX=a;
+		if (top.MAX == 2) top.MaxMin=-1 ; else top.MaxMin=1 ;
+ }
+
+/////////////////////////////////////////////////////////
+//---------------------------------------------------------------------------------------------------------
+function XorS(a){
+	if (a<= top.NrM) return("X"+a); else  return("S"+(a-top.NrM)); 
+   }
+function Build0(){
+	top.ArrC_M= top.NrM *1 + top.NrN *1; // (1*1) +
+	top.ArrA  = new top.AArr(top.MaxN,top.ArrC_M);
+	top.ArrA.CopyFrom(top.ANM);
+	top.ArrA.SetRows(top.NrN);
+	top.ArrA.SetCols(top.ArrC_M);//top.ArrC_M
+//alert(top.ArrA.GetRows()+ " * "+top.ArrA.GetCols());
+	for ( n= 1; n<=top.NrN; n++) { 
+	for ( u= 1; u<=top.NrN; u++) {
+			v=0;if (u ==n) v=1;
+		r=(1*top.NrM)+(1*u);	top.ArrA.SetElementAt(n,r,v);
+		}}
+
+	top.ArrB  = new top.AArr(top.NrN,  1  ); 
+	top.ArrB.Zero();
+//alert("OK");	
+	top.ArrCC.SetRows(1);
+	top.ArrC  = new top.AArr(    1  ,top.ArrC_M);
+	top.ArrC.CopyFrom(top.ArrCC);
+
+	top.ArrC.SetRows(1);
+	top.ArrC.SetCols(top.ArrC_M);
+	if (top.MAX==2 ) top.ArrC.MultByN( -1 );
+	
+	for ( var i=top.NrM ; i<= top.ArrC_M;) { 	top.ArrC.SetElementAt( 1 , ++i ,0 )  ;}
+//alert(top.NrN);
+//top.ArrTIN.SetRows(top.NrN);
+
+	
+	top.ArrQ  = new top.AArr(top.NrN,1);
+	top.Base  = new top.AArr(top.NrN,  1  ); 
+	top.ArrTI = new top.AArr(top.NrN,1);
+
+	top.TIN.SetRows(top.NrN);
+
+	top.ArrTI.CopyFrom(top.TIN     );
+//alert("OK2");
+
+	top.ArrCf=new top.AArr(1,top.ArrC_M);
+//alert("OK1");
+	top.ArrCf.CopyFrom(top.ArrC);
+//	for ( var i=top.NrM ; i<= top.ArrC_M; ) { 	top.ArrCf.SetElementAt( 1 , ++i ,0 )  ;}
+	top.ArrCf.MultByN( -1 );
+
+
+	top.ArrZ  = new top.AArr(   1,   1);
+	top.ArrZ.SetElementAt(1,1,0);
+	
+//	v=	top.NrM;top.Ch_NrM(1,2);top.Ch_NrM(1,v);
+//	v=	top.NrN;top.Ch_NrM(2,2);top.Ch_NrM(2,v);
+//	v=	top.NrN;
+//	for ( n= 1; n<=top.NrN; n++) { top.ArrLFT.SetElementAt( n,1, ++v ); }  //n + top.NrM         v=(1*top.NrM)+(1*n);
+//alert("OK-FFF");	
+}
+
+function Build2(Scr,Ver){ // Ver =2 se Calc2
+	Build0();
+//**********
+//	top.ArrC_M= top.NrM *1 + top.NrN *1; // (1*1) +
+
+	top.ArrC.SetCols(top.ArrC_M);//top.ArrC_M
+
+	top.ArrAb  = new top.AArr(   top.NrN,   top.NrN);
+	top.ArrAb.CopyFrom(top.ArrA.GetNColumns(top.LFT.Transposed()));
+	top.ArrAb.SetCols(top.LFT.GetRows());
+
+	top.ArrCb  = new top.AArr(   1,   top.ArrC_M);
+	top.ArrCb.CopyFrom(top.ArrC.GetNColumns(top.LFT.Transposed()));
+	top.ArrCb.SetCols(top.LFT.GetRows());
+
+	top.ArrTT  = new top.AArr(  top.NrN,   top.NrN);
+	top.ArrTT.CopyFrom(top.ArrAb );
+//		top.ArrTT..Invert();
+//		DisplayAll(1,top.ArrTT.Inverted(),"<BR>ArrTT   : ");
+
+//	d=top.ArrAb.Det(); // Determinante:
+	
+	top.ArrA1b  = new top.AArr(   top.LFT.GetRows(),   top.LFT.GetCols());
+	top.ArrA1b.CopyFrom(top.ArrAb);
+	top.ArrA1b.Invert();
+
+	top.ArrAf  = new top.AArr(   top.LFT.GetRows(),   top.LFT.GetCols());
+	top.ArrAf.CopyFrom(top.ArrA1b);
+
+//	top.ArrTI.SetRows(top.NrN);
+//alert ("Build2");
+	top.ArrAf  = new top.AArr(   top.ArrA1b.GetRows(),   top.ArrA.GetCols());
+	top.ArrAf.CopyFrom( top.ArrAf.Mult(top.ArrA1b,top.ArrA) );
+
+	top.ArrBf     = new top.AArr(   top.ArrA1b.GetRows(),   top.ArrTI.GetCols());
+	top.ArrBf.CopyFrom( top.ArrBf.Mult(top.ArrA1b,top.ArrTI) );
+//alert ("Build2");
+	top.ArrZf     = new top.AArr(   top.ArrCb.GetRows(),   top.ArrBf.GetCols());
+	top.ArrZf.CopyFrom( top.ArrZf.Mult(top.ArrCb,top.ArrBf) );
+
+	top.ArrCf     = new top.AArr(   top.ArrCb.GetRows(),   top.ArrAf.GetCols());
+	top.ArrCf.CopyFrom( top.ArrZf.Mult(top.ArrCb,top.ArrAf) );
+	top.ArrCf.Sub(top.ArrC);
+
+	if (Scr=="N") Build2_detalhes(1);
+//	alert ("Build2-F");
+}
+function Build2_detalhes(f){
+		DisplayAll(f,top.ArrLFT.Transposed(),"<BR>top.ArrLFT_T: ");
+		DisplayAll(f,top.ArrC  ,"<BR>C   : ");
+		DisplayAll(f,top.ArrA  ,"<BR>A   : ");
+		DisplayAll(f,top.ArrTI ,"<BR>B   : ");
+		DisplayAll(f,top.ArrCb ,"<BR>Cb  : ");
+		DisplayAll(f,top.ArrAb ,"<BR>Ab  : ");
+//		DisplayAll(f,top.ArrTT.Inverted() ,"<BR>Ab-T  : ");
+		DisplayAll(f,top.ArrA1b,"<BR>A-1b: ");
+		DisplayAll(f,top.ArrAf ,"<BR>A'  : A-1b  * A");
+		DisplayAll(f,top.ArrBf ,"<BR>B'  : A-1b  * B");
+		DisplayAll(f,top.ArrZf,"<BR>Z'  : Cb     * B' ");
+		DisplayAll(f,top.ArrCf,"<BR>C'  : -C     + Cb * A' ");
+
+}
+function DisplayAll(f,A,String){
+f=1;
+// alert("AA");
+		top.Fwrite(String+'<BR>');
+		top.Fwrite('       <table border="1"  height="25" width="100"><TR>');//width="600"
+	for (var i= 1; i<= A.GetRows(); i++) {
+ 	top.Fwrite('       <tr width="36" height="25" width="10">');
+		A.SayRow(f,i,1,A.GetCols());  // FrameNr:1,Row,Start,End
+ 	top.Fwrite('       </tr>');
+		}
+ 	top.Fwrite('       </tr>');
+ 	top.Fwrite('       </table>');
+
+}
+
+// -------------------------------------------End --------
+// End hiding -->
+</script>
+
+<frameset cols="127,*">
+  <noframes>
+  <body>
+  <p>This page uses frames, but your browser doesn't support them.</p>
+
+  </body>
+  </noframes>
+  <frame name="contents" target="main" src="Io4.htm">
+  <frame name="main" src="Start.htm">
+</frameset>
+
+</html>
+
+
+

@@ -1,0 +1,61 @@
+
+<html>
+
+<head>
+<meta http-equiv="Content-Language" content="pt">
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+<meta name="GENERATOR" content="Microsoft FrontPage 4.0">
+<meta name="ProgId" content="FrontPage.Editor.Document">
+<title>Número de incógnitas</title>
+</head>
+
+<body OnLoad="Getdata1(1)" OnUnLoad="Setdata1(1)">
+&nbsp;
+<script Language="JavaScript">
+<!-- Start Hiding from older browsers
+
+function Getdata1(a) {
+//	alert("Start xxx"+top.NrM);
+}
+function Setdata1(a) {
+//	alert("End xxx"+top.NrM);
+   top.Ch_NrM(1,top.NrM);
+   top.Ch_NrM(2,top.NrN);
+	var v=top.NrM ;	for ( n= 1; n<=top.MaxM; n++) { top.ArrLFT.SetElementAt(n,1, ++v ); }  //n + top.NrM
+	var v=top.NrM ;
+	for ( n= 1; n<=top.MaxM; n++) { top.LFT.SetElementAt(n,1, ++v ); }  //n + top.NrM
+
+	top.ANM.SetRows(top.NrN);
+	top.ANM.SetCols(top.NrM);
+	top.ArrLFT.SetRows(top.NrN);
+//	top.ANM.SetRows(top.NrN);
+	top.TIN.SetRows(top.NrN);
+
+
+
+}
+
+/////////////////////////////////////////////////////////
+
+//alert(top.ANM[1]);
+/////////////////////////////////////////////////////////
+// End hiding -->
+</script>
+
+
+<form method="POST" action="../_derived/nortbots.htm" webbot-action="--WEBBOT-SELF--" onSubmit="location.href='../_derived/nortbots.htm';return false;" WEBBOT-onSubmit>
+<script language="JavaScript"><!--
+	document.write('  <p>N.Variáveis de Decisão : <input type="text" name="T1" size="7" value="'+top.NrM+'" onchange="top.Ch_NrM(1,this.value)" ></p>');
+	document.write('  <p>Número de Restrições &nbsp : <input type="text" name="T2" size="7" value="'+top.NrN+'" onchange="top.Ch_NrM(2,this.value)"></p>');
+
+// --></script>
+  <p>&nbsp;</p>
+  <p><input type="submit" value="Submit" name="B1"><input type="reset" value="Reset" name="B2"></p>
+</form>
+
+</body>
+
+</html>
+
+
+

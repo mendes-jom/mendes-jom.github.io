@@ -1,0 +1,385 @@
+<html>
+
+<head>
+<meta http-equiv="Content-Type"
+content="text/html; charset=iso-8859-1">
+<meta name="GENERATOR" content="Microsoft FrontPage Express 2.0">
+<title>irs3</title>
+</head>
+
+<body bgcolor="#00FFFF" OnLoad="Getdata1(1)" OnUnload="">
+
+</script><script
+language="JavaScript"><!--
+function Getdata1(a) {
+	document.formulario1.CB1.checked=top.DEFH[1];
+	document.formulario1.T111.value=top.RBA[1]; 
+	document.formulario1.T121.value=top.RFA[1];
+	document.formulario1.T131.value=top.CSS[1];
+	document.formulario1.T141.value=top.GRA[1];
+	document.formulario1.T151.value=top.RBH0[1];
+	document.formulario1.T161.value=top.RFH[1];
+	document.formulario1.B11.value=top.DA[1];
+	document.formulario1.B21.value=top.RBH[1];
+//--
+	document.formulario1.CB2.checked=top.DEFH[2];
+	document.formulario1.T112.value=top.RBA[2]; 
+	document.formulario1.T122.value=top.RFA[2];
+	document.formulario1.T132.value=top.CSS[2];
+	document.formulario1.T142.value=top.GRA[2];
+	document.formulario1.T152.value=top.RBH0[2];
+	document.formulario1.T162.value=top.RFH[2];
+	document.formulario1.B12.value=top.DA[2];
+	document.formulario1.B22.value=top.RBH[2];
+//--
+	document.formulario1.CB3.checked=top.DEFH[3];
+	document.formulario1.T113.value=top.RBA[3]; 
+	document.formulario1.T123.value=top.RFA[3];
+	document.formulario1.T133.value=top.CSS[3];
+	document.formulario1.T143.value=top.GRA[3];
+	document.formulario1.T153.value=top.RBH0[3];
+	document.formulario1.T163.value=top.RFH[3];
+	document.formulario1.B13.value=top.DA[3];
+	document.formulario1.B23.value=top.RBH[3];
+//--
+	document.formulario1.CB4.checked=top.DEFH[4];
+	document.formulario1.T114.value=top.RBA[4]; 
+	document.formulario1.T124.value=top.RFA[4];
+	document.formulario1.T134.value=top.CSS[4];
+	document.formulario1.T144.value=top.GRA[4];
+	document.formulario1.T154.value=top.RBH0[4];
+	document.formulario1.T164.value=top.RFH[4];
+	document.formulario1.B14.value=top.DA[4];
+	document.formulario1.B24.value=top.RBH[4];
+//--
+	document.formulario1.CB5.checked=top.DEFH[5];
+	document.formulario1.T115.value=top.RBA[5]; 
+	document.formulario1.T125.value=top.RFA[5];
+	document.formulario1.T135.value=top.CSS[5];
+	document.formulario1.T145.value=top.GRA[5];
+	document.formulario1.T155.value=top.RBH0[5];
+	document.formulario1.T165.value=top.RFH[5];
+	document.formulario1.B15.value=top.DA[5];
+	document.formulario1.B25.value=top.RBH[5];
+//--
+	document.formulario1.T239.value=top.MPS_PDR
+}
+//------------------------------------------------------------------------
+function NoChange(x) {
+   if (x == 1 ) {document.formulario1.CB1.checked=top.DEFH[1]}
+   if (x == 2 ) {document.formulario1.CB2.checked=top.DEFH[2]}
+
+   alert("Nao pode mudar o valor aqui... Faz parte de Identificação");
+}
+//-----------------------------
+function ChGRA(x,a) {
+    	top.GRA[x]= valorde(a);
+   	alert("Nao sei o tratamento exacto... Englobo no Rendimento Bruto...");
+}
+
+//-----------------
+function valorde(x) {
+if (x=="") {x="0"};
+	x=eval(""+x);
+if( (""+x)=="undefined") x=0; 
+return x;
+}
+function ChRBH(x,a) {
+      top.RBH0[x]=valorde(a);  //a;
+	ChRBH1(x);
+}
+//-----------------
+function GenChRBH(x,tf) {
+	top.DEFH[x]=eval(tf);
+  alert(tf);
+        
+  	if (tf == false ) {top.DAH[x]=top.DedCatHNorm;top.DA[x]=top.DedCatNorm;}
+             	    else  {top.DAH[x]=top.DedCatHInv; top.DA[x]=top.DedCatInv; }
+  	ChRBH1(x);
+}
+//-----------------
+function ChRBH1(x) {
+
+	top.RBH[x] = Math.max(top.RBH0[x]-top.DAH[x] , 0  );
+
+alert(" "+top.RBH0[x]+"-"+top.DAH[x]+"="+top.RBH[x]);
+/*
+	switch (x) {
+		case 1 : document.formulario1.B21.value=top.RBH[x];break;
+		case 2 : document.formulario1.B22.value=top.RBH[x];break;
+		case 3 : document.formulario1.B23.value=top.RBH[x];break;
+		case 4 : document.formulario1.B24.value=top.RBH[x];break;
+		case 5 : document.formulario1.B25.value=top.RBH[x];break;
+		default: alert("ChRBH-x-error");
+	   	  }
+*/
+if (x==1) document.formulario1.B21.value=top.RBH[x];
+if (x==2) document.formulario1.B22.value=top.RBH[x];
+if (x==3) document.formulario1.B23.value=top.RBH[x];
+if (x==4) document.formulario1.B24.value=top.RBH[x];
+if (x==5) document.formulario1.B25.value=top.RBH[x];
+
+}
+//-----------------
+function ChRBA(x,a) {
+   	top.RBA[x]=valorde(a);
+   	ChRL(x);
+}
+//-----------------
+function ChRFH(x,a) {
+   	top.RFH[x]=valorde(a);
+}
+//-----------------
+function ChRFA(x,a) {
+   	top.RFA[x]=valorde(a);
+}
+//-----------------
+function ChCSS(x,a) {
+   	top.CSS[x]=valorde(a);
+   	ChRL(x);
+}
+//-----------------
+function ChRL(x) {
+	top.DA[x] = Math.min(Math.round(0.7* top.RBA[x]) , top.MaxDA  );
+	top.DA[x] = Math.max(                 top.DA[x]  , top.CSS[x] );
+	top.DA[x] = Math.min(                 top.DA[x]  , top.RBA[x] ); 
+// Não pode ser em certos casos,porquê ???
+
+/*
+	switch (x) {
+		case 1 : document.formulario1.B11.value=top.DA[x];break;
+		case 2 : document.formulario1.B12.value=top.DA[x];break;
+		case 3 : document.formulario1.B13.value=top.DA[x];break;
+		case 4 : document.formulario1.B14.value=top.DA[x];break;
+		case 5 : document.formulario1.B15.value=top.DA[x];break;
+		default: alert("ChRL-x-error");
+	           }
+*/
+if (x==1) document.formulario1.B11.value=top.DA[x];
+if (x==2) document.formulario1.B12.value=top.DA[x];
+if (x==3) document.formulario1.B13.value=top.DA[x];
+if (x==4) document.formulario1.B14.value=top.DA[x];
+if (x==5) document.formulario1.B15.value=top.DA[x];
+
+}
+
+
+
+//document.write('<p align="center"><strong>');
+//document.write("Englobamento de Rendimentos "+(1996+top.ID[3])+"<BR></strong></p>");
+
+
+
+
+
+// -->
+</script>
+
+
+
+
+
+
+
+<Form action="action1" method="OBTER" enctype="tipocodif1"
+name="formulario1" target="fram1" atribexp1="val1">
+    <input type="hidden" name="nome1" value="val1">
+
+<script language="JavaScript"><!--
+document.write('<p align="center"><strong>');
+document.write("Englobamento de Rendimentos "+(1996+top.ID[3])+"<BR></strong></p>");
+// --></script>
+
+    <table border="0">
+
+        <tr>
+            <td><table border="1">
+                <tr>
+                    <td>RENDIMENTOS<br>
+                    RETENÇÕES<br>
+                    DEDUÇÕES</td>
+                    <td><table border="0" width="100%">
+                        <tr><td align="right">
+                            <p align="center">TITULARES-Sujeitos Passivos/Deficientes</p>
+                            </td>
+                        </tr>
+                        <tr>
+                        <td><table border="0">
+                          <tr>
+                          <td><table border="1" cellpadding="2" cellspacing="3">
+                              <tr><td>Suj Passivo A</td><tr><td>
+                                  <input type="checkbox" onClick="NoChange(1)" 
+                                   name="CB1">Deficiente</td></tr>
+                              </tr></table>
+                          </td>
+                          <td><table border="1" cellpadding="2" cellspacing="3">
+                              <tr><td>Suj Passivo B</td><tr><td>
+                                  <input type="checkbox" onClick="NoChange(2)" 
+                                   name="CB2">Deficiente</td>
+			      </tr></table>
+                          </td>
+                          <td><table border="1" cellpadding="2" cellspacing="3">
+                              <tr><td>Dependente 1</center></td><tr><td>
+                                  <input type="checkbox" onClick="GenChRBH(3,this.checked)" 
+                                   name="CB3">Deficiente</td>
+			      </tr></table>
+                          </td>
+                          <td><table border="1" cellpadding="2" cellspacing="3">
+                              <tr><td>Dependente 2</center></td><tr><td>
+                                  <input type="checkbox" onClick="GenChRBH(4,this.checked)" 
+                                   name="CB4">Deficiente</td>
+                               </tr></table>
+                          </td>
+                          <td><table border="1" cellpadding="2"cellspacing="3">
+                              <tr><td>Dependente 3</center></td><tr><td>
+                                  <input type="checkbox" onClick="GenChRBH(5,this.checked)" 
+                                   name="CB5">Deficiente</td>
+                              </tr></table>
+                           </td>
+                        </tr>
+                        </table>
+                        </td>
+                        </tr>
+                    </table>
+                    </td>
+                </tr>
+                <tr>
+                    <td><table border="1">
+                        <tr>
+                            <td><table border="1" cellpadding="2"cellspacing="3">
+                                   <tr><td>Rendimento.Bruto</td></tr>
+                                   <tr><td>Retenção.na.Fonte</td></tr>
+                                   <tr><td>Contrib. Seg.Soc.</td></tr>
+                                   <tr><td>Ded.Específica</td></tr>
+                                   <tr><td>Gratif.art.2,nr3 </td></tr>
+                                   <tr><td><strong>Cat.H Pensões </strong></td></tr>
+                                   <tr><td>Total Recebidas</td></tr>
+                                   <tr><td>Rendimento.Bruto</td></tr>
+                                   <tr><td>Retenção.na.Fonte</td></tr>
+                                </table>
+                            </td>
+                        </tr>
+                    </table>
+                    </td>
+                    <td><table border="0">     
+                        <tr>
+                            <td><table border="1">
+                                <tr><td><input type="text" size="11" name="T111"
+			                  onchange="ChRBA(1,this.value)"></td></tr>
+                                <tr><td><input type="text" size="11" name="T121"
+                                    onchange="ChRFA(1,this.value)"></td></tr>
+                                <tr><td><input type="text" size="11" name="T131"
+ 		                        onchange="ChCSS(1,this.value)"></td>
+                                </tr><tr><td><input type="button" size="9" name="B11"
+                                    value="-------------"></td></tr>
+                                <tr><td><input type="text" size="11" name="T141"
+                                    onchange="ChGRA(1,this.value)"></td></tr>
+                                <tr><td>-------------</td></tr>
+                                <tr><td><input type="text" size="11" name="T151"
+                                    onchange="ChRBH(1,this.value)"></td></tr>
+                                </tr><tr><td><input type="button" size="9" name="B21"
+                                    value="-------------"></td></tr>
+                                <tr><td><input type="text" size="11" name="T161"
+                                    onchange="ChRFH(1,this.value)"></td></tr>
+                            </table>
+                            </td>
+                            <td><table border="1">
+                                <tr><td><input type="text" size="11" name="T112"
+			                  onchange="ChRBA(2,this.value)"></td></tr>
+                                <tr><td><input type="text" size="11" name="T122"
+                                    onchange="ChRFA(2,this.value)"></td></tr>
+                                <tr><td><input type="text" size="11" name="T132"
+ 		                        onchange="ChCSS(2,this.value)"></td>
+                                </tr><tr><td><input type="button" size="9" name="B12"
+                                    value="-------------"></td></tr>
+                                <tr><td><input type="text" size="11" name="T142"
+                                    onchange="ChGRA(2,this.value)"></td></tr>
+                                <tr><td>-------------</td></tr>
+                                <tr><td><input type="text" size="11" name="T152"
+                                    onchange="ChRBH(2,this.value)"></td></tr>
+                                </tr><tr><td><input type="button" size="9" name="B22"
+                                    value="-------------"></td></tr>
+                                <tr><td><input type="text" size="11" name="T162"
+                                    onchange="ChRFH(2,this.value)"></td></tr>
+                            </table>
+                            </td>
+                             <td><table border="1">
+                                <tr><td><input type="text" size="11" name="T113"
+			                  onchange="ChRBA(3,this.value)"></td></tr>
+                                <tr><td><input type="text" size="11" name="T123"
+                                    onchange="ChRFA(3,this.value)"></td></tr>
+                                <tr><td><input type="text" size="11" name="T133"
+ 		                        onchange="ChCSS(3,this.value)"></td>
+                                </tr><tr><td><input type="button" size="9" name="B13"
+                                    value="-------------"></td></tr>
+                                <tr><td><input type="text" size="11" name="T143"
+                                    onchange="ChGRA(3,this.value)"></td></tr>
+                                <tr><td>-------------</td></tr>
+                                <tr><td><input type="text" size="11" name="T153"
+                                    onchange="ChRBH(3,this.value)"></td></tr>
+                                </tr><tr><td><input type="button" size="9" name="B23"
+                                    value="-------------"></td></tr>
+                                <tr><td><input type="text" size="11" name="T163"
+                                    onchange="ChRFH(3,this.value)"></td></tr>
+                           </table>
+                            </td>
+                                <td><table border="1">
+                                <tr><td><input type="text" size="11" name="T114"
+			                  onchange="ChRBA(4,this.value)"></td></tr>
+                                <tr><td><input type="text" size="11" name="T124"
+                                    onchange="ChRFA(4,this.value)"></td></tr>
+                                <tr><td><input type="text" size="11" name="T134"
+ 		                        onchange="ChCSS(4,this.value)"></td>
+                                </tr><tr><td><input type="button" size="9" name="B14"
+                                    value="-------------"></td></tr>
+                                <tr><td><input type="text" size="11" name="T144"
+                                    onchange="ChGRA(4,this.value)"></td></tr>
+                                <tr><td>-------------</td></tr>
+                                <tr><td><input type="text" size="11" name="T154"
+                                    onchange="ChRBH(4,this.value)"></td></tr>
+                                </tr><tr><td><input type="button" size="9" name="B24"
+                                    value="-------------"></td></tr>
+                                <tr><td><input type="text" size="11" name="T164"
+                                    onchange="ChRFH(4,this.value)"></td></tr>
+                            </table>
+                            </td>
+                            <td><table border="1">
+                                <tr><td><input type="text" size="11" name="T115"
+			                  onchange="ChRBA(5,this.value)"></td></tr>
+                                <tr><td><input type="text" size="11" name="T125"
+                                    onchange="ChRFA(5,this.value)"></td></tr>
+                                <tr><td><input type="text" size="11" name="T135"
+ 		                        onchange="ChCSS(5,this.value)"></td>
+                                </tr><tr><td><input type="button" size="9" name="B15"
+                                    value="-------------"></td></tr>
+                                <tr><td><input type="text" size="11" name="T145"
+                                    onchange="ChGRA(5,this.value)"></td></tr>
+                                <tr><td>-------------</td></tr>
+                                <tr><td><input type="text" size="11" name="T155"
+                                    onchange="ChRBH(5,this.value)"></td></tr>
+                                </tr><tr><td><input type="button" size="9" name="B25"
+                                    value="-------------"></td></tr>
+                                <tr><td><input type="text" size="11" name="T165"
+                                    onchange="ChRFH(5,this.value)"></td></tr>
+                            </table>
+                            </td>
+                        </tr>
+                    </table>
+                    </td>
+                </tr>
+            </table>
+            </td>
+        </tr>
+    </table>
+    <table border="0">
+        <tr>
+            <td><font size="3"><strong>Montante de prémios de
+            seguro no âmbito de profissões de desgaste rápido:</strong>
+            </font></td>
+            <td><input type="text" size="12" name="T239"
+                                   onchange="top.MPS_PDR=eval(valorde(this.value))"></td>
+        </tr>
+    </table>
+</Form>
+</body>
+</html>

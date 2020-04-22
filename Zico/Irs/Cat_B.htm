@@ -1,0 +1,378 @@
+<html>
+
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<meta name="GENERATOR" content="Microsoft FrontPage 3.0">
+<title>Rendimentos Cat. B</title>
+</head>
+
+<body bgcolor="#00FFFF" OnLoad="Getdata1(1)" OnUnload>
+<!--webbot bot="HTMLMarkup" startspan TAG="XBOT" --></SCRIPT><!--webbot bot="HTMLMarkup" endspan
+-->
+<script language="JavaScript"><!--
+function Getdata1(a) {
+PrtV(1);
+PrtV(2);
+PrtV(3);
+PrtV(4);
+PrtV(5);
+
+}
+//------------------------------------------------------------------------
+function NoChange(x,a) {
+//GenChRBH(x,a);
+   if (x == 1 ) {document.formulario1.DEF1.checked=top.DEF[1]}
+   if (x == 2 ) {document.formulario1.DEF2.checked=top.DEF[2]}
+
+   alert("Nao pode mudar o valor aqui... Faz parte de Identificação");
+}
+//-----------------------------
+function ChGRA(x,a) {
+    top.GRA[x]= valorde(a);
+   	alert("Nao sei o tratamento exacto...\n Englobo no Rendimento Líquido...");
+	ChRBH1(x);
+}
+//ChTRTI(1,this.value)
+function ChTRTI(x,a) {
+      top.TRTI[x]=valorde(a);  //a;
+      top.EDIT_actual=x;
+//top.TI_calc(x);
+      top.RLTI[x]=top.TRTI[x]-top.DETI[x];
+      PrtV(x);
+}
+function ChDETI(x,a) {
+      top.DETI[x]=valorde(a);  //a;
+      top.RLTI[x]=top.TRTI[x]-top.DETI[x]
+      PrtV(x);
+}
+
+function ChRFTI(x,a) {
+      top.RFTI[x]=valorde(a);  //a;
+}
+
+//-----------------
+function valorde(x) {
+if (x=="") {x="0"};
+	x=eval(""+x);
+if( (""+x)=="undefined") x=0; 
+return x;
+}
+function ChRBH(x,a) {
+      top.RBH0[x]=valorde(a);  //a;
+	ChRBH1(x);
+}
+//-----------------
+function GenChRBH(x,tf) {
+	top.DEF[x]=eval(tf);
+//  alert(tf);
+//  top.CalcRendimentosX(x);
+
+  	ChRBH1(x);
+}
+//-----------------
+function ChRBH1(x) {
+
+//	top.RBH[x] = Math.max(top.RBH0[x]-top.DAH[x] , 0  );
+
+//alert(" "+top.RBH0[x]+"-"+top.DAH[x]+"="+top.RBH[x]);
+//top.CalcRendimentosX(x);
+//PrtV(x);
+ChRL(x);
+}
+//-----------------
+function PrtV(x) {
+
+/*
+	switch (x) {
+
+		case 1 : document.formulario1.RLH1.value=top.RBH[x];break;
+		case 2 : document.formulario1.RLH2.value=top.RBH[x];break;
+		case 3 : document.formulario1.RLH3.value=top.RBH[x];break;
+		case 4 : document.formulario1.RLH4.value=top.RBH[x];break;
+		case 5 : document.formulario1.RLH5.value=top.RBH[x];break;
+		default: alert("ChRBH-x-error");
+	   	  }
+*/
+if (x==1) {
+	document.formulario1.TRTI1.value=top.TRTI[x];
+	document.formulario1.DETI1.value=top.DETI[x];
+	document.formulario1.RLTI1.value=top.RLTI[x];
+	document.formulario1.RFTI1.value=top.RFTI[x];
+
+
+
+    		}
+if (x==2) {
+	document.formulario1.TRTI2.value=top.TRTI[x];
+	document.formulario1.DETI2.value=top.DETI[x];
+	document.formulario1.RLTI2.value=top.RLTI[x];
+	document.formulario1.RFTI2.value=top.RFTI[x];
+
+
+    		}
+if (x==3) {
+	document.formulario1.TRTI3.value=top.TRTI[x];
+	document.formulario1.DETI3.value=top.DETI[x];
+	document.formulario1.RLTI3.value=top.RLTI[x];
+	document.formulario1.RFTI3.value=top.RFTI[x];
+
+    		}
+if (x==4) {
+	document.formulario1.TRTI4.value=top.TRTI[x];
+	document.formulario1.DETI4.value=top.DETI[x];
+	document.formulario1.RLTI4.value=top.RLTI[x];
+	document.formulario1.RFTI4.value=top.RFTI[x];
+
+
+    		}
+if (x==5) {
+	document.formulario1.TRTI5.value=top.TRTI[x];
+	document.formulario1.DETI5.value=top.DETI[x];
+	document.formulario1.RLTI5.value=top.RLTI[x];
+	document.formulario1.RFTI5.value=top.RFTI[x];
+
+    		}
+}
+//-----------------
+function ChRBA(x,a) {
+   	top.RBA[x]=valorde(a);
+   	ChRL(x);
+}
+function ChRBAx(x,a) {
+  // alert("AA"+x);
+   	top.RBX[x]=valorde(a);
+   	ChRL(x);
+}
+//-----------------
+function ChRFH(x,a) {
+   	top.RFH[x]=valorde(a);
+}
+//-----------------
+function ChRFA(x,a) {
+   	top.RFA[x]=valorde(a);
+}
+//-----------------
+function ChCSS(x,a) {
+   	top.CSS[x]=valorde(a);
+   	ChRL(x);
+}
+//-----------------
+function ChRL(x) {
+//alert("ChRL");
+top.CalcRendimentosX(x);
+
+PrtV(x);
+
+}
+
+// -->
+</script>
+
+
+<form action="action1" method="OBTER" enctype="tipocodif1" name="formulario1"
+target="fram1" atribexp1="val1">
+  <input type="hidden" name="nome1" value="val1"><script language="JavaScript"><!--
+document.write('<p align="center"><strong>');
+document.write("13 - Englobamento de Rendimentos do trabalho dependente (Cat.B) "+(1996+top.ID[3])+" TESTES <BR></strong></p>");
+// --></script>
+<table
+  border="3" width="64">
+    <caption>&nbsp;</caption>
+    <tr>
+      <td width="140"><div align="center"><center><p>RENDIMENTOS<br>
+      RETENÇÕES<br>
+      DEDUÇÕES</td>
+      <td width="500" align="center"><div align="center"><center><table width="100% border=" 0">
+        <tr>
+          <td align="right" colspan="5"><div align="center"><center><p>TITULARES-Sujeitos
+          Passivos/Deficientes</td>
+        </tr>
+        <tr align="center">
+          <td><div align="center"><center><table border="1" width="104" height="26">
+            <tr>
+              <td width="99" height="1" align="center"><div align="center"><center><p>Suj Passivo A</td>
+            </tr>
+          </table>
+          </center></div></td>
+          <td align="center"><div align="center"><center><table border="1" width="100">
+            <tr>
+              <td width="94" align="center"><div align="center"><center><p>Suj Passivo B</td>
+            </tr>
+          </table>
+          </center></div></td>
+          <td align="center" align="center"><div align="center"><center><table border="1"
+          width="100">
+            <tr>
+              <td width="91"><div align="center"><center><p>Dependente 1</td>
+            </tr>
+          </table>
+          </center></div></td>
+          <td align="center"><div align="center"><center><table border="1" width="100">
+            <tr>
+              <td width="88"><div align="center"><center><p>Dependente 2</td>
+            </tr>
+          </table>
+          </center></div></td>
+          <td align="center"><div align="center"><center><table border="1" width="100">
+            <tr>
+              <td width="88"><div align="center"><center><p>Dependente 3</td>
+            </tr>
+          </table>
+          </center></div></td>
+        </tr>
+      </table>
+      </center></div></td>
+    </tr>
+    <tr align="center">
+      <td><div align="left"><table border="0" width="100%" cellpadding="2">
+        <caption>&nbsp;</caption>
+        <tr>
+          <td width="127"><div align="left"><table border="1" cellpadding="3" cellspacing="2"
+          width="112" height="128">
+            <tr>
+              <td width="118" size="12" nowrap style="line-height: 17px" valign="top" height="14">Ren.B.Tributável</td>
+            </tr>
+            <tr>
+              <td width="118" size="12" nowrap style="line-height: 21px" valign="top" height="1">&nbsp;&nbsp;&nbsp;
+              </td>
+            </tr>
+            <tr>
+              <td width="118" size="12" style="line-height: 21px" valign="top" height="15">Ded.Específica</td>
+            </tr>
+            <tr>
+              <td width="118" style="line-height: 21px" valign="top" height="25">Rendimen.Liquido</td>
+            </tr>
+            <tr>
+              <td width="118" style="line-height: 17px" valign="top" height="29">Retenção.na.Fonte</td>
+            </tr>
+          </table>
+          </div></td>
+        </tr>
+      </table>
+      </div></td>
+      <td valign="top"><div align="left"><table border="0">
+        <caption><strong>Cat. B -&nbsp; Trabalho Independente</strong></caption>
+        <tr>
+          <td><table border="1" cellpadding="1">
+            <tr>
+              <td><input type="text" size="11" name="TRTI1" onchange="ChTRTI(1,this.value)"></td>
+            </tr>
+            <tr>
+              <td bgcolor="#C0C0C0"><div align="center"><center><p><small><input type="button"
+              value="Cálculos" name="TI_B1"
+              onclick="top.EDIT_actual=1;window.open('Indep99.htm','DADOS')"></small></td>
+            </tr>
+            <tr align="center">
+              <td><div align="center"><center><p><input type="text" size="11" name="DETI1"
+              onchange="ChDETI(1,this.value)"></td>
+            </tr>
+            <tr align="center">
+              <td bgcolor="#C0C0C0"><div align="center"><center><p><input type="button" size="9"
+              name="RLTI1" value="-------------"></td>
+            </tr>
+            <tr align="center">
+              <td><div align="center"><center><p><input type="text" size="11" name="RFTI1"
+              onchange="ChRFTI(1,this.value)"></td>
+            </tr>
+          </table>
+          </td>
+          <td align="center"><table border="1">
+            <tr>
+              <td><input type="text" size="11" name="TRTI2" onchange="ChTRTI(2,this.value)"></td>
+            </tr>
+            <tr>
+              <td bgcolor="#C0C0C0"><div align="center"><center><p><input type="button"
+              value="Cálculos" name="TI_B2"
+              onclick="top.EDIT_actual=2;window.open('Indep99.htm','DADOS')" style="line-height: normal"></td>
+            </tr>
+            <tr align="center">
+              <td><div align="center"><center><p><input type="text" size="11" name="DETI2"
+              onchange="ChDETI(2,this.value)"></td>
+            </tr>
+            <tr align="center">
+              <td bgcolor="#C0C0C0"><div align="center"><center><p><input type="button" size="9"
+              name="RLTI2" value="-------------"></td>
+            </tr>
+            <tr align="center">
+              <td><div align="center"><center><p><input type="text" size="11" name="RFTI2"
+              onchange="ChRFTI(2,this.value)"></td>
+            </tr>
+          </table>
+          </td>
+          <td align="center"><table border="1">
+            <tr>
+              <td><input type="text" size="11" name="TRTI3" onchange="ChTRTI(3,this.value)"></td>
+            </tr>
+            <tr>
+              <td bgcolor="#C0C0C0"><div align="center"><center><p><input type="button"
+              value="Cálculos" name="TI_B3"
+              onclick="top.EDIT_actual=3;window.open('Indep99.htm','DADOS')"></td>
+            </tr>
+            <tr align="center">
+              <td><div align="center"><center><p><input type="text" size="11" name="DETI3"
+              onchange="ChDETI(3,this.value)"></td>
+            </tr>
+            <tr align="center">
+              <td bgcolor="#C0C0C0"><div align="center"><center><p><input type="button" size="9"
+              name="RLTI3" value="-------------"></td>
+            </tr>
+            <tr align="center">
+              <td><div align="center"><center><p><input type="text" size="11" name="RFTI3"
+              onchange="ChRFTI(3,this.value)"></td>
+            </tr>
+          </table>
+          </td>
+          <td align="center"><table border="1">
+            <tr>
+              <td><input type="text" size="11" name="TRTI4" onchange="ChTRTI(4,this.value)"></td>
+            </tr>
+            <tr>
+              <td bgcolor="#C0C0C0"><div align="center"><center><p><input type="button"
+              value="Cálculos" name="TI_B4"
+              onclick="top.EDIT_actual=4;window.open('Indep99.htm','DADOS')"></td>
+            </tr>
+            <tr align="center">
+              <td><div align="center"><center><p><input type="text" size="11" name="DETI4"
+              onchange="ChDETI(4,this.value)"></td>
+            </tr>
+            <tr align="center">
+              <td bgcolor="#C0C0C0"><div align="center"><center><p><input type="button" size="9"
+              name="RLTI4" value="-------------"></td>
+            </tr>
+            <tr align="center">
+              <td><div align="center"><center><p><input type="text" size="11" name="RFTI4"
+              onchange="ChRFTI(4,this.value)"></td>
+            </tr>
+          </table>
+          </td>
+          <td align="center"><table border="1">
+            <tr>
+              <td><input type="text" size="11" name="TRTI5" onchange="ChTRTI(5,this.value)"></td>
+            </tr>
+            <tr>
+              <td bgcolor="#C0C0C0"><div align="center"><center><p><input type="button"
+              value="Cálculos" name="TI_B5"
+              onclick="top.EDIT_actual=5;window.open('Indep99.htm','DADOS')"></td>
+            </tr>
+            <tr align="center">
+              <td><div align="center"><center><p><input type="text" size="11" name="DETI5"
+              onchange="ChDETI(5,this.value)"></td>
+            </tr>
+            <tr align="center">
+              <td bgcolor="#C0C0C0"><div align="center"><center><p><input type="button" size="9"
+              name="RLTI5" value="-------------"></td>
+            </tr>
+            <tr align="center">
+              <td><div align="center"><center><p><input type="text" size="11" name="RFTI5"
+              onchange="ChRFTI(5,this.value)"></td>
+            </tr>
+          </table>
+          </td>
+        </tr>
+      </table>
+      </div></td>
+    </tr>
+  </table>
+</form>
+</body>
+</html>

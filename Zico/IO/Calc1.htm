@@ -1,0 +1,103 @@
+<html>
+
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+<meta name="GENERATOR" content="Microsoft FrontPage 4.0">
+<meta name="ProgId" content="FrontPage.Editor.Document">
+<title>New Page 1</title>
+</head>
+
+<body OnLoad="Getdata1(1)">
+<!--webbot bot="HTMLMarkup" startspan TAG="XBOT" --></SCRIPT><!--webbot bot="HTMLMarkup" endspan -->
+<script LANGUAGE="JavaScript">
+<!-- Start hiding from older browsers ------------ Start
+//-----------------------------------------------------
+
+function Getdata1(a) {
+}
+
+//	Tabelax(1,top.ArrLFT,top.ArrCf0,top.ArrZ,top.ArrA,top.ArrTI,top.ArrQ);
+function Tabelax(f  ,L       ,C      ,Z      ,A        ,B      ,Q){//frames[f].
+
+	top.ArrLFT.SetRows(top.NrN);
+	entra = top.Entra( 1,"N",L,C );//top.ArrLFT,top.ArrC
+	if (entra >0) sai=top.Sai(1, "N",entra,L,A,B,Q );//top.ArrLFT
+
+
+		document.write('       <table border="1" width="600" height="59">');
+		document.write('         <tr>');
+		document.write('           <td width="36" height="25">&nbsp; -</td>');
+		document.write('           <td width="30" height="25" align="center">Z</td>');
+	for (var i= 1; i<= top.ArrC_M; i++) { document.write('  <td width="135" height="25" align="center">'+top.XorS(i)+'</td>');	}
+		document.write('          <td width="140" height="25" align="center">Z/TI</td>');
+		document.write('          <td width="160" height="25" align="center">Q</td>');
+		document.write('        </tr>');
+		document.write('        <tr>');
+		document.write('          <td width="36" height="25" align="center">-</td>');
+		document.write('          <td width="213" height="25" align="center">1</td>');
+	C.SayRow(f,1,1,top.ArrC_M);  	// FrameNr:1,Row,Start,End
+	Z.SayRow(f,1,1,1);
+		document.write('           <td width="160" height="25" align="right"></td>');
+		document.write('         </tr>');
+	for ( ii= 1; ii<=top.NrN; ii++) { 
+		document.write('        <tr>');
+		document.write('          <td width="36" height="25" align="center">' +top.XorS(L.GetElementAt(ii,1))+'</td>');//
+		document.write('          <td width="213" height="25" align="center">0</td>');
+	A.SayRow(f,ii,1,A.GetCols());  	// FrameNr:1,Row,Start,End//top.ArrA.GetCols()
+	B.SayRow(f,ii,1,1);  				// FrameNr:1,Row,Start,End
+	Q.SayRow(f,ii,1,1);  				// FrameNr:1,Row,Start,End
+ 	document.write('       </tr>');
+	}
+ 	document.write('       </table>');
+ 	if ( entra >0) top.Entra(1, "Y",L,C );//top.ArrC
+	if ( sai   >0) top.Sai(1,   "Y",entra,L,A,B,Q );
+
+
+}
+
+
+
+/////////////////////////////////////////////////////////
+// End hiding -->
+</script>
+
+<form method="POST" action="--WEBBOT-SELF--" onSubmit="">
+  <p>&nbsp;</p>
+  <div align="left">
+ <p>Primeiro Quadro de Simplex:<BR><p>
+<script language="JavaScript"><!--
+
+	if (top.MAX == 1) document.write('Problema de Máximos'); else document.write('Problema de Mínimos transformado em Máximo:');
+
+	top.Build0();
+	
+
+//	entra = Entra( "N",top.ArrLFT  );
+//	if (entra >0) sai=Sai( "N",entra,top.ArrLFT );
+	Tabelax(1,top.ArrLFT,top.ArrCf,top.ArrZ,top.ArrA,top.ArrTI,top.ArrQ);
+
+// 	if ( entra >0) Entra( "Y",top.ArrLFT );
+//	if ( sai   >0) Sai(   "Y",entra,top.ArrLFT );
+
+
+ 	document.write('       <BR>');
+ 	document.write('  </div> ');
+ 	document.write('  <p><br>');
+	for ( i= 1; i<=top.NrN; i++) {
+		document.write('Variável Básica '+i+" : "+top.LFT.GetElementAt(i,1)+" : ");
+	 	document.write('  <select size="1" onChange="top.ChLFT('+i+',1+this.selectedIndex)" >');
+		for ( n= 1; n<=top.ArrC_M; n++) {
+		 	document.write('  <option ');
+		 	if (top.LFT.GetElementAt(i,1) == n )  document.write( ' selected ');
+		 	document.write('>'+ top.XorS(n)  +'</option>');
+		}
+	 	document.write('  </select><BR>');
+ 	}
+//-----------------------------------------------------------------------
+
+// --></script>
+</form>
+
+</body>
+
+</html>
